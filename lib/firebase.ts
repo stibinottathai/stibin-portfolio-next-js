@@ -38,10 +38,10 @@ export async function initAnalytics(): Promise<Analytics | null> {
  * Emails allowed to edit the portfolio. Gmail ignores dots in the local
  * part, so comparison is done on the dot-stripped, lowercased form.
  */
-const ADMIN_EMAILS = [
-  "stib.inau.gus.tin.e.07@gmail.com",
-  "stibinaugustine3047@gmail.com",
-];
+const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+  .split(",")
+  .map(e => e.trim())
+  .filter(Boolean);
 
 function normalizeEmail(email: string): string {
   const [local, domain] = email.toLowerCase().split("@");
