@@ -16,10 +16,10 @@ const firebaseConfig = {
 /** Public web API key — also used server-side to verify ID tokens. */
 export const FIREBASE_WEB_API_KEY = firebaseConfig.apiKey;
 
-export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const googleProvider = new GoogleAuthProvider();
+export const app = typeof window !== "undefined" ? (getApps().length ? getApp() : initializeApp(firebaseConfig)) : null as any;
+export const auth = typeof window !== "undefined" ? getAuth(app) : null as any;
+export const db = typeof window !== "undefined" ? getFirestore(app) : null as any;
+export const googleProvider = typeof window !== "undefined" ? new GoogleAuthProvider() : null as any;
 
 let analytics: Analytics | null = null;
 

@@ -344,7 +344,7 @@ export const DEFAULT_CONTENT: PortfolioContent = {
 /* Firestore access                                                    */
 /* ------------------------------------------------------------------ */
 
-const CONTENT_DOC = doc(db, "portfolio", "content");
+const getPortfolioDoc = () => doc(db, "portfolio", "content");
 const CACHE_KEY = "portfolio-content-cache-v1";
 
 
@@ -398,7 +398,7 @@ export function mergeWithDefaults(
 
 export async function loadContent(): Promise<PortfolioContent> {
   try {
-    const snap = await getDoc(CONTENT_DOC);
+    const snap = await getDoc(getPortfolioDoc());
     return mergeWithDefaults(
       snap.exists() ? (snap.data() as Partial<PortfolioContent>) : undefined,
     );
@@ -412,7 +412,7 @@ export function subscribeContent(
   onChange: (content: PortfolioContent) => void,
 ): () => void {
   return onSnapshot(
-    CONTENT_DOC,
+    getPortfolioDoc(),
     (snap) => {
       const data = snap.exists()
         ? (snap.data() as Partial<PortfolioContent>)
@@ -428,5 +428,5 @@ export function subscribeContent(
 }
 
 export async function saveContent(content: PortfolioContent): Promise<void> {
-  await setDoc(CONTENT_DOC, content);
+  await setDoc(getPortfolioDoc(), content);
 }

@@ -21,7 +21,7 @@ export interface ContactMessage {
   read: boolean;
 }
 
-const MESSAGES = collection(db, "messages");
+const getMessagesCollection = () => collection(db, "messages");
 
 /** Called by the public contact form — allowed for anyone by the rules. */
 export async function sendMessage(data: {
@@ -29,7 +29,7 @@ export async function sendMessage(data: {
   email: string;
   message: string;
 }): Promise<void> {
-  await addDoc(MESSAGES, {
+  await addDoc(getMessagesCollection(), {
     name: data.name.trim().slice(0, 100),
     email: data.email.trim().slice(0, 200),
     message: data.message.trim().slice(0, 3000),
@@ -43,7 +43,7 @@ export function subscribeMessages(
   onChange: (messages: ContactMessage[]) => void,
   onError: (error: Error) => void,
 ): () => void {
-  const q = query(MESSAGES, orderBy("createdAt", "desc"));
+  const q = query(getMessagesCollection(), orderBy("createdAt", "desc"));
   return onSnapshot(
     q,
     (snap) => {
