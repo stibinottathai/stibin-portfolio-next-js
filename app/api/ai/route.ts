@@ -4,6 +4,9 @@ import {
 } from "@/lib/content";
 import { FIREBASE_WEB_API_KEY, isAdminEmail } from "@/lib/firebase";
 
+export const dynamic = 'force-dynamic';
+
+
 const MODEL = process.env.OPENROUTER_MODEL ?? "deepseek/deepseek-v4-flash";
 
 /* ------------------------------------------------------------------ */
