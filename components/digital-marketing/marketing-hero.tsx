@@ -32,7 +32,7 @@ export default function MarketingHero() {
   }, [isModalOpen]);
 
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-center overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16">
+    <section id="top" className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-center overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16">
       {/* Aurora Ambient Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="aurora absolute -top-20 left-[15%] size-[400px] bg-cyan-500/40" />
@@ -54,10 +54,10 @@ export default function MarketingHero() {
               onClick={() => setIsModalOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={isModalOpen}
-              title="Click to view full photo"
-              className="group mb-4 sm:mb-6 inline-flex max-w-full items-center gap-3 sm:gap-4 rounded-2xl sm:rounded-full border border-(--border) bg-(--surface-2)/90 p-1.5 sm:p-2 pe-4 sm:pe-5 backdrop-blur-xl transition-all hover:border-cyan-400/60 hover:scale-[1.02] active:scale-95 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              title="Click to view Stibin Augustine's full profile photo"
+              className="group mb-4 sm:mb-6 inline-flex max-w-full items-center gap-3 sm:gap-4 rounded-2xl sm:rounded-full border border-(--border) bg-(--surface-2)/90 p-1.5 sm:p-2 pe-4 sm:pe-5 backdrop-blur-xl transition-all hover:border-cyan-400/80 hover:bg-(--surface-2) hover:scale-[1.02] active:scale-95 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              {/* Photo with vibrant gradient ring */}
+              {/* Photo with vibrant gradient ring & expand icon */}
               <div className="relative size-12 sm:size-14 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-500 to-fuchsia-500 p-[2.5px] transition-transform group-hover:scale-105">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -68,11 +68,50 @@ export default function MarketingHero() {
                     (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
                   }}
                 />
+
+                {/* Subtle Hover Zoom Overlay */}
+                <div className="absolute inset-0 rounded-full bg-slate-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[1px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="size-4"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                </div>
+
+                {/* Expand Corner Badge Indicator */}
+                <span
+                  className="absolute -top-1 -right-1 flex size-4 sm:size-4.5 items-center justify-center rounded-full bg-cyan-400 text-slate-950 font-bold shadow-sm ring-2 ring-(--surface) group-hover:scale-115 transition-transform"
+                  title="Expandable"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="size-2.5"
+                  >
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                </span>
+
+                {/* Live Status Pulse Dot */}
                 <span className="absolute -bottom-0.5 -end-0.5 flex size-3.5 sm:size-4 items-center justify-center rounded-full bg-(--surface) ring-2 ring-(--surface)">
                   <span className="size-2 sm:size-2.5 rounded-full bg-emerald-400 animate-pulse" />
                 </span>
               </div>
-              {/* Text info */}
+
+              {/* Text info with visible Click Indicator */}
               <div className="flex flex-col text-left min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="truncate text-xs sm:text-sm font-bold text-(--foreground) tracking-tight group-hover:text-cyan-400 transition-colors">
@@ -82,13 +121,16 @@ export default function MarketingHero() {
                     <span className="size-1 rounded-full bg-emerald-400" />
                     Available
                   </span>
+                  <span className="hidden xs:inline-flex items-center gap-1 rounded-full bg-cyan-500/15 px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-cyan-600 dark:text-cyan-300 border border-cyan-500/30 group-hover:border-cyan-400 group-hover:bg-cyan-500/25 transition-all">
+                    <span>🔍</span> Tap to expand
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="truncate font-mono text-[10px] sm:text-[11px] font-medium text-(--accent)">
                     SEO, Paid Ads &amp; AI Growth
                   </span>
-                  <span className="hidden sm:inline text-[10px] text-(--muted) opacity-0 group-hover:opacity-100 transition-opacity">
-                    · 🔍 View
+                  <span className="xs:hidden text-[9px] font-semibold text-cyan-500 dark:text-cyan-300">
+                    · 🔍 Expand
                   </span>
                 </div>
               </div>

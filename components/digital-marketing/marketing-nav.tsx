@@ -108,9 +108,9 @@ export default function MarketingNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-(--border) bg-(--background)/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        {/* Brand / Profile */}
+        {/* Brand / Profile (Scrolls to top of Digital Marketing) */}
         <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+          <a href="#top" className="flex items-center gap-2.5 sm:gap-3 group">
             <span className="relative flex size-9 sm:size-10 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px] transition-transform group-hover:scale-105">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -133,7 +133,7 @@ export default function MarketingNav() {
                 Digital Marketing &amp; SEO
               </span>
             </div>
-          </Link>
+          </a>
         </div>
 
         {/* Center Streamlined Desktop Nav Links */}
