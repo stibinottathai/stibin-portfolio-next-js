@@ -288,10 +288,10 @@ function Nav({
 function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
   return (
     <Reveal>
-      <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+      <p className="mb-1.5 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
         {kicker}
       </p>
-      <h2 className="mb-10 text-3xl font-bold tracking-tight sm:text-4xl">
+      <h2 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
         {title}
       </h2>
     </Reveal>
@@ -301,7 +301,7 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
 function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
   const { hero } = content;
   return (
-    <section id="top" className="relative overflow-hidden pt-36 pb-24 sm:pt-44">
+    <section id="top" className="relative overflow-hidden pt-28 pb-10 sm:pt-36 sm:pb-14">
       {/* Aurora background */}
       <div className="absolute inset-0 -z-10">
         <div className="aurora absolute -top-20 left-[10%] size-[420px] bg-cyan-500/60" />
@@ -425,7 +425,7 @@ function AboutSection({
 }) {
   const { about } = content;
   return (
-    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20">
+    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
       <SectionHeading
         kicker={t.sections.aboutKicker}
         title={t.sections.aboutTitle}
@@ -463,7 +463,7 @@ function SkillsSection({
   t: UIStrings;
 }) {
   return (
-    <section id="skills" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20">
+    <section id="skills" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
       <SectionHeading
         kicker={t.sections.skillsKicker}
         title={t.sections.skillsTitle}
@@ -501,7 +501,7 @@ function ExperienceSection({
   return (
     <section
       id="experience"
-      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20"
+      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14"
     >
       <SectionHeading
         kicker={t.sections.experienceKicker}
@@ -637,7 +637,7 @@ function ProjectsSection({
   return (
     <section
       id="projects"
-      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20"
+      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14"
     >
       <SectionHeading
         kicker={t.sections.projectsKicker}
@@ -645,7 +645,7 @@ function ProjectsSection({
       />
 
       <Reveal>
-        <div className="mb-8 flex gap-2">
+        <div className="mb-6 sm:mb-8 flex gap-2">
           {(["All", "Mobile", "Web"] as const).map((f) => (
             <button
               key={f}
@@ -681,7 +681,7 @@ function EducationSection({
   return (
     <section
       id="education"
-      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20"
+      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14"
     >
       <SectionHeading
         kicker={t.sections.educationKicker}
@@ -822,7 +822,7 @@ function ContactSection({
   const { hero, socials } = content;
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-5 py-24">
+      <div className="mx-auto max-w-6xl px-5 py-10 sm:py-14">
         <Reveal>
           <div className="card relative overflow-hidden p-8 sm:p-12">
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-500/10 via-transparent to-fuchsia-500/10" />
