@@ -37,7 +37,7 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={photo || "/avatar.svg"}
-                  alt="Stibin Augustine"
+                  alt="Stibin Augustine — Full-Stack Developer & Digital Marketing Specialist in Dubai"
                   className="size-10 rounded-full object-cover bg-(--surface)"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
@@ -80,6 +80,11 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/#services" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
+                  Services
+                </Link>
+              </li>
+              <li>
                 <Link href="/#skills" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
                   Tech Arsenal
                 </Link>
@@ -92,6 +97,11 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
               <li>
                 <Link href="/#projects" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
                   Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
+                  FAQ (AEO)
                 </Link>
               </li>
               <li>

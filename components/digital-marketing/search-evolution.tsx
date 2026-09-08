@@ -17,7 +17,7 @@ export default function SearchEvolution() {
               02 · The Modern Landscape
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
-              From Search Engines to <span className="text-gradient">AI Engines</span>
+              From Traditional Search to <span className="text-gradient">AI-Driven Discovery</span>
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-(--muted)">
               Search is changing. Visibility is no longer only about ranking a webpage. Modern digital marketing also requires being present where people ask questions, compare businesses and discover information through AI.

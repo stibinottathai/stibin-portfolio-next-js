@@ -374,7 +374,7 @@ export const EVOLUTION_STEPS: EvolutionStep[] = [
   {
     label: "AI Search",
     tag: "Conversational Retrieval",
-    description: "Multimodal and conversational search engines.",
+    description: "Multimodal and conversational AI assistants.",
   },
   {
     label: "Generative Discovery",
@@ -396,14 +396,14 @@ export const EVOLUTION_CARDS: EvolutionCard[] = [
       "Fast Core Web Vitals & mobile indexing",
     ],
     icon: "🎯",
-    badge: "Search Engines",
+    badge: "Search Results",
   },
   {
     id: "aeo-card",
     title: "AEO",
     tagline: "Get selected for answers.",
     description:
-      "Formatting and structuring information with precision so search engines can pull immediate, direct answers into featured snippets and voice assistants.",
+      "Formatting and structuring information with precision so algorithms and assistants can pull immediate, direct answers into featured snippets and voice search.",
     focusPoints: [
       "Question-focused semantic copywriting",
       "Deep schema markup & JSON-LD entities",
@@ -900,3 +900,53 @@ export const MARKETING_CTA = {
     href: "/",
   },
 };
+
+/* ------------------------------------------------------------------ */
+/* 12. Marketing FAQs (AEO & GEO High-Intent Q&A)                      */
+/* ------------------------------------------------------------------ */
+
+export interface MarketingFAQItem {
+  question: string;
+  answer: string;
+  category: "Strategy" | "SEO & Search" | "AI & GEO" | "Paid Ads";
+}
+
+export const MARKETING_FAQS: MarketingFAQItem[] = [
+  {
+    question: "What makes Stibin Augustine's digital marketing and SEO approach different?",
+    answer:
+      "As both a full-stack engineer and digital marketing specialist in Dubai, I solve technical bottlenecks directly in code (Core Web Vitals, server-side rendering, schema graphs, semantic markup) while crafting commercial-intent keyword strategies, AEO/GEO entity authority, and high-converting Google & Meta ad campaigns.",
+    category: "Strategy",
+  },
+  {
+    question: "What is the difference between SEO, AEO, and GEO?",
+    answer:
+      "Traditional SEO optimizes for web search algorithms to rank in organic results. AEO (Answer Engine Optimization) structures factual content to win direct snippets, voice search, and Google AI Overviews. GEO (Generative Engine Optimization) optimizes brand entity signals so generative AI assistants (ChatGPT, Perplexity, Gemini, Claude) recommend your business.",
+    category: "AI & GEO",
+  },
+  {
+    question: "How did you achieve #1 Google rankings for commercial terms like 'buy laptops from dubai to india'?",
+    answer:
+      "By combining deep technical SEO and speed optimization with intent-driven on-page architecture, comprehensive product topic clusters, rich schema structured data, and frictionless conversion UX designed specifically for cross-border buyers.",
+    category: "SEO & Search",
+  },
+  {
+    question: "What digital marketing services do you manage in Dubai and the UAE?",
+    answer:
+      "I manage end-to-end digital growth: Technical & On-Page SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), Google Ads (Search, Display, Performance Max), Meta Ads (Facebook & Instagram), Social Media Strategy, and Landing Page Conversion Optimization (CRO).",
+    category: "Paid Ads",
+  },
+  {
+    question: "How do you leverage AI tools in your marketing and advertising workflows?",
+    answer:
+      "I utilize generative AI and automation tools (Claude Code, ChatGPT, Gemini, Perplexity, AI image generation, Prompt Engineering) for semantic search analysis, competitor topic gap identification, rapid ad creative split-testing, and automated workflow pipelines.",
+    category: "AI & GEO",
+  },
+  {
+    question: "Do you collaborate with international and remote clients outside Dubai?",
+    answer:
+      "Yes. In addition to on-site and local engagements across Dubai and the UAE, I collaborate with remote clients and brands globally across the GCC (Qatar, Saudi Arabia), Europe, North America, and Asia.",
+    category: "Strategy",
+  },
+];
+

@@ -64,6 +64,23 @@ export interface SocialLink {
   url: string;
 }
 
+export interface ServiceItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  deliverables: string[];
+  tech: string[];
+  link?: string;
+  linkText?: string;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+  category: "General" | "Development" | "Marketing" | "AI & GEO";
+}
+
 export interface PortfolioContent {
   hero: Hero;
   about: About;
@@ -75,40 +92,175 @@ export interface PortfolioContent {
 }
 
 /* ------------------------------------------------------------------ */
-/* Default content (seeded from Stibin's CVs)                          */
+/* Core Services (Full-Stack, Mobile, AI, Digital Marketing)          */
+/* ------------------------------------------------------------------ */
+
+export const CORE_SERVICES: ServiceItem[] = [
+  {
+    id: "full-stack-web",
+    title: "Full-Stack Web Development",
+    category: "Web & SaaS Engineering",
+    description:
+      "High-performance web applications, responsive platforms, and bespoke SaaS products built with Next.js, React, Node.js, and TypeScript. Engineered for lightning-fast speeds, secure architecture, and optimal SEO crawlability.",
+    deliverables: [
+      "Custom Next.js & React Web Apps",
+      "RESTful API & Database Architecture",
+      "Interactive Dashboards & Portals",
+      "Speed & Core Web Vitals Optimization",
+    ],
+    tech: ["Next.js", "React.js", "TypeScript", "Node.js", "Tailwind CSS"],
+    link: "#projects",
+    linkText: "View Web Projects →",
+  },
+  {
+    id: "mobile-apps",
+    title: "Mobile App Development",
+    category: "iOS & Android Apps",
+    description:
+      "Production-grade cross-platform mobile apps for iOS and Android using Flutter and Dart. Crafted with Clean Architecture, predictable reactive state management (Riverpod/Bloc), offline support, and smooth 60fps animations.",
+    deliverables: [
+      "Cross-Platform iOS & Android Apps",
+      "Clean Architecture & Riverpod/Bloc",
+      "Payment Gateways & KYC Integration",
+      "Real-Time Sync with Firebase / Supabase",
+    ],
+    tech: ["Flutter", "Dart", "Firebase", "Clean Architecture", "REST APIs"],
+    link: "#projects",
+    linkText: "View Mobile Apps →",
+  },
+  {
+    id: "ai-solutions",
+    title: "AI Development & Automations",
+    category: "AI Integrations & Agents",
+    description:
+      "Integrating cutting-edge generative AI, OpenAI/LLM APIs, AI agents, intelligent chatbots, and automated workflows into web and mobile ecosystems to automate repetitive business tasks and supercharge user engagement.",
+    deliverables: [
+      "OpenAI & LLM API Integrations",
+      "Custom AI Chatbots & Assistants",
+      "Business Workflow Automation",
+      "AI-Assisted Web & Mobile Features",
+    ],
+    tech: ["OpenAI API", "LLMs", "AI Agents", "Python", "Prompt Engineering"],
+    link: "/digital-marketing#ai-stack",
+    linkText: "Explore AI Capabilities →",
+  },
+  {
+    id: "digital-marketing-seo",
+    title: "Digital Marketing, SEO, AEO & GEO",
+    category: "Search & Growth Optimization",
+    description:
+      "Full-funnel digital marketing combining organic search (#1 Google SEO rankings), Answer Engine Optimization (AEO), Generative Engine Optimization (GEO for ChatGPT/Perplexity), and high-ROI Google & Meta ad campaigns.",
+    deliverables: [
+      "Technical, On-Page & Local Dubai SEO",
+      "AEO & GEO Optimization (AI & Answer Search)",
+      "Google Ads (Search, Display, PMax)",
+      "Meta Ads (Facebook & Instagram Funnels)",
+    ],
+    tech: ["Technical SEO", "AEO", "GEO", "Google Ads", "Meta Ads", "Analytics"],
+    link: "/digital-marketing",
+    linkText: "View Marketing Case Studies →",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Homepage FAQs (AEO & GEO High-Intent Q&A)                           */
+/* ------------------------------------------------------------------ */
+
+export const HOMEPAGE_FAQS: FAQItem[] = [
+  {
+    question: "Who is Stibin Augustine?",
+    answer:
+      "Stibin Augustine is a Full-Stack Developer and Digital Marketing Specialist based in Bur Dubai, Dubai, UAE. With 4+ years of hands-on experience, he builds scalable mobile applications (Flutter), modern web platforms (Next.js/React), AI integrations, and drives revenue-focused digital marketing, SEO, AEO, and GEO search campaigns for clients in the UAE and internationally.",
+    category: "General",
+  },
+  {
+    question: "What services does Stibin Augustine offer in Dubai, UAE?",
+    answer:
+      "Stibin Augustine offers four core services: (1) Full-Stack Web Development (Next.js, React, Node.js, TypeScript), (2) Cross-Platform Mobile App Development (Flutter for iOS & Android), (3) AI Integrations & Workflow Automation (OpenAI API, LLMs, AI agents), and (4) Digital Marketing & Search Optimization (Technical SEO, #1 Google rankings, AEO, GEO, Google Ads, and Meta Ads).",
+    category: "General",
+  },
+  {
+    question: "Is Stibin Augustine available for freelance projects and remote work?",
+    answer:
+      "Yes. Stibin is based in Bur Dubai, Dubai, UAE for local UAE engagements and on-site meetings, and also works with international clients remotely across the GCC, Europe, North America, and Asia for full-stack development, mobile apps, and digital marketing consulting.",
+    category: "General",
+  },
+  {
+    question: "What technologies does Stibin Augustine specialize in?",
+    answer:
+      "For front-end & web: Next.js, React.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, and Zustand. For mobile: Flutter, Dart, Riverpod, Bloc, Provider, Clean Architecture, and MVVM. For cloud/backend: Firebase (Auth, Firestore, FCM), Supabase, RESTful APIs, and Node.js. For marketing & AI: Google Search Console, Google Ads, Meta Ads Manager, OpenAI APIs, and AI workflow automation.",
+    category: "Development",
+  },
+  {
+    question: "What is AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization)?",
+    answer:
+      "AEO (Answer Engine Optimization) formats and structures your digital content to win direct answers in voice search, Google AI Overviews, and conversational AI assistants. GEO (Generative Engine Optimization) optimizes semantic entities, facts, and authority signals so generative AI platforms (like ChatGPT, Perplexity, Gemini, and Claude) accurately identify and cite your brand when users ask for recommendations.",
+    category: "AI & GEO",
+  },
+  {
+    question: "Can Stibin Augustine build AI-powered web and mobile applications?",
+    answer:
+      "Yes. Stibin integrates AI APIs, large language models (LLMs), conversational agents, and automated data pipelines into Next.js web applications and Flutter mobile apps, enabling intelligent features like automated analysis, AI chat, and workflow automation.",
+    category: "AI & GEO",
+  },
+  {
+    question: "How can I contact or hire Stibin Augustine?",
+    answer:
+      "You can reach Stibin Augustine directly via email at stibinaugustine3047@gmail.com, by phone or WhatsApp at +971 56 556 4136, or by submitting the contact form on this website. He responds promptly to project inquiries, consulting requests, and contract opportunities.",
+    category: "General",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Default content (seeded from Stibin's CVs & positioning)           */
 /* ------------------------------------------------------------------ */
 
 export const DEFAULT_CONTENT: PortfolioContent = {
   hero: {
     name: "Stibin Augustine",
     photoUrl: "/avatar.svg",
-    headline: "Flutter & Front-End Developer",
+    headline: "Full-Stack Developer & Digital Marketing Specialist",
     roles: [
-      "Flutter Developer",
-      "Next.js / React Developer",
-      "Mobile & Web Application Engineer",
+      "Full-Stack Developer (Next.js & React)",
+      "Digital Marketer & SEO Specialist",
+      "Mobile App Engineer (Flutter)",
+      "AI Integrations & Automations Developer",
     ],
     tagline:
-      "I build production-grade mobile and web applications — from GovTech platforms for the Qatar Olympic Committee to fintech apps moving money across borders.",
+      "I engineer production-grade web & mobile applications and deliver high-impact digital marketing, SEO, AEO, and GEO visibility for businesses in Dubai, UAE, and worldwide.",
     location: "Bur Dubai, Dubai, UAE",
     email: "stibinaugustine3047@gmail.com",
     phone: "+971 56 556 4136",
-    availability: "Available immediately · UAE Visit Visa",
+    availability: "Available for Projects & Roles · Dubai, UAE",
     resumeUrl: "",
   },
   about: {
     summary:
-      "Results-driven developer with 4+ years of hands-on experience delivering scalable cross-platform mobile and web applications across fintech, GovTech, e-commerce, and enterprise domains. Proven track record building production-grade apps for the Qatar Olympic Committee and UAE-based international remittance platforms. Strong command of Clean Architecture, state management (Riverpod, Bloc, Provider), REST API integration, Firebase, and Supabase — now specialising in modern web development with Next.js, React, TypeScript, and Tailwind CSS, and experienced in AI-assisted, agentic coding workflows.",
+      "Results-driven Full-Stack Developer and Digital Marketing Specialist based in Dubai, UAE, with 4+ years of hands-on experience delivering scalable web applications, cross-platform mobile apps, and high-ROI digital marketing campaigns. Proven track record building enterprise applications for the Qatar Olympic Committee, fintech cross-border remittance platforms in the UAE, and achieving #1 Google organic rankings for commercial search terms. Expert in Next.js, React, TypeScript, Flutter, Firebase, AI integrations (OpenAI/LLMs), technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and performance advertising across Google Ads and Meta Ads.",
     stats: [
-      { value: "4+", label: "Years Experience" },
-      { value: "15+", label: "Apps & Platforms Shipped" },
-      { value: "30+", label: "Reusable UI Components Built" },
-      { value: "3", label: "Industries: Fintech · GovTech · E-commerce" },
+      { value: "4+", label: "Years Hands-On Experience" },
+      { value: "15+", label: "Apps & Web Platforms Shipped" },
+      { value: "#1", label: "Google Organic Rankings Achieved" },
+      { value: "100%", label: "Dubai & Global Client Availability" },
     ],
   },
   skills: [
     {
-      category: "Mobile",
+      category: "Full-Stack Web Development",
+      items: [
+        "Next.js",
+        "React.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "Node.js",
+        "Tailwind CSS",
+        "HTML5 / Semantic CSS3",
+        "Zustand",
+        "REST APIs",
+      ],
+    },
+    {
+      category: "Mobile App Development",
       items: [
         "Flutter (Mobile & Web)",
         "Dart",
@@ -117,42 +269,32 @@ export const DEFAULT_CONTENT: PortfolioContent = {
         "Provider",
         "Clean Architecture",
         "MVVM",
+        "Android & iOS Deployment",
       ],
     },
     {
-      category: "Web",
+      category: "Digital Marketing, SEO & Paid Ads",
       items: [
-        "Next.js",
-        "React.js",
-        "TypeScript",
-        "JavaScript (ES6+)",
-        "HTML5",
-        "CSS3",
-        "Tailwind CSS",
-        "Zustand",
-        "SEO Optimisation",
+        "Technical & On-Page SEO",
+        "AEO (Answer Engine Optimization)",
+        "GEO (Generative Engine Optimization)",
+        "Google Ads (PPC & Search)",
+        "Meta Ads (Facebook & Instagram)",
+        "Google Search Console",
+        "Social Media Strategy",
+        "Keyword Intent Research",
       ],
     },
     {
-      category: "Backend & BaaS",
+      category: "AI, Backend & Cloud Architecture",
       items: [
-        "Firebase (Auth, Firestore, Realtime DB, FCM)",
+        "AI API Integrations (OpenAI / LLMs)",
+        "AI Workflow Automation",
+        "AI-Assisted Coding",
+        "Firebase (Auth, Firestore, FCM)",
         "Supabase",
-        "REST APIs",
-        "Node.js",
-        "Python",
-      ],
-    },
-    {
-      category: "Tools & Practices",
-      items: [
         "Git & GitHub",
-        "VS Code",
-        "Postman",
-        "Figma",
-        "Vercel",
-        "Agile / Scrum",
-        "AI-assisted & agentic coding",
+        "Vercel Deployment",
         "AES-256 Encryption",
       ],
     },

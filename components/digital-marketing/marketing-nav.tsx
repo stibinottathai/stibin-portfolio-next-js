@@ -116,7 +116,7 @@ export default function MarketingNav() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photo || "/avatar.svg"}
-                alt="Stibin Augustine"
+                alt="Stibin Augustine — Digital Marketer & Full-Stack Developer in Dubai"
                 className="size-full rounded-full object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

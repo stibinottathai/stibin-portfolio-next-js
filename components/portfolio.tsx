@@ -5,8 +5,13 @@ import Link from "next/link";
 import {
   loadCachedContent,
   subscribeContent,
+  DEFAULT_CONTENT,
+  CORE_SERVICES,
+  HOMEPAGE_FAQS,
   type PortfolioContent,
   type Project,
+  type ServiceItem,
+  type FAQItem,
 } from "@/lib/content";
 import { initAnalytics } from "@/lib/firebase";
 import { sendMessage } from "@/lib/messages";
@@ -160,10 +165,10 @@ function Nav({
 
   const links = [
     { href: "#about", label: t.nav.about },
+    { href: "#services", label: t.nav.services },
     { href: "#skills", label: t.nav.skills },
     { href: "#experience", label: t.nav.experience },
     { href: "#projects", label: t.nav.projects },
-    { href: "#education", label: t.nav.education },
     { href: "#contact", label: t.nav.contact },
   ];
 
@@ -177,7 +182,7 @@ function Nav({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photoUrl || "/avatar.svg"}
-                alt={name}
+                alt={`Profile of ${name} — Full-Stack Developer & Digital Marketer in Dubai`}
                 className="size-full rounded-full object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
@@ -192,7 +197,7 @@ function Nav({
                 {name}
               </span>
               <span className="font-mono text-[9px] tracking-wider uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 dark:from-cyan-300 dark:via-indigo-300 dark:to-fuchsia-300">
-                Flutter &amp; Web Developer
+                Full-Stack &amp; Digital Marketing · Dubai
               </span>
             </div>
           </a>
@@ -218,7 +223,7 @@ function Nav({
             className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3.5 py-1.5 font-mono text-[11px] font-medium text-(--muted) transition-all hover:border-cyan-400 hover:text-(--foreground) dark:border-cyan-500/40 dark:bg-cyan-950/40 dark:text-cyan-200 dark:hover:border-cyan-300"
           >
             <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            Marketing →
+            Marketing &amp; SEO →
           </Link>
 
           <ThemeToggle />
@@ -287,13 +292,17 @@ function Nav({
 
 function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
   return (
-    <Reveal>
-      <p className="mb-1.5 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
-        {kicker}
-      </p>
-      <h2 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
-        {title}
-      </h2>
+    <Reveal direction="up" className="mb-6 sm:mb-8">
+      <div className="relative">
+        <p className="mb-1.5 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase flex items-center gap-2">
+          <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          {kicker}
+        </p>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-(--foreground)">
+          {title}
+        </h2>
+        <div className="mt-3 h-[2px] w-12 bg-gradient-to-r from-cyan-400 via-indigo-500 to-transparent rounded-full" />
+      </div>
     </Reveal>
   );
 }
@@ -328,8 +337,8 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
           </Reveal>
 
           <Reveal delay={80}>
-            <h1 className="max-w-4xl text-5xl leading-[1.05] font-bold tracking-tight sm:text-7xl">
-              {t.hero.greeting}{" "}
+            <h1 className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]">
+              <span>{t.hero.greeting} </span>
               <span className="text-gradient">{hero.name}</span>
             </h1>
           </Reveal>
@@ -402,7 +411,7 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
               {/* eslint-disable-next-line @next/next/no-img-element -- src can be a data URI or any external host set from the admin panel */}
               <img
                 src={hero.photoUrl}
-                alt={hero.name}
+                alt={`${hero.name} — Full-Stack Developer and Digital Marketer in Dubai, UAE`}
                 className="relative aspect-4/5 w-full rounded-[2rem] object-cover"
               />
               <span className="absolute -end-3 -bottom-4 rounded-xl border border-(--border) bg-(--surface-2)/95 px-4 py-2 font-mono text-xs text-(--accent) shadow-lg backdrop-blur">
@@ -431,15 +440,15 @@ function AboutSection({
         title={t.sections.aboutTitle}
       />
       <div className="grid gap-10 lg:grid-cols-5">
-        <Reveal className="lg:col-span-3">
+        <Reveal direction="left" className="lg:col-span-3">
           <p className="text-base leading-relaxed text-(--muted) sm:text-lg">
             {about.summary}
           </p>
         </Reveal>
         <div className="grid grid-cols-2 gap-4 lg:col-span-2">
           {about.stats.map((s, i) => (
-            <Reveal key={i} delay={i * 90}>
-              <div className="card h-full p-5">
+            <Reveal key={i} direction="scale" delay={i * 90}>
+              <div className="card card-hover flex flex-col items-center justify-center p-5 text-center h-full">
                 <p className="text-gradient text-3xl font-bold">{s.value}</p>
                 <p className="mt-1.5 text-xs leading-snug text-(--muted)">
                   {s.label}
@@ -448,6 +457,73 @@ function AboutSection({
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesSection({ t }: { t: UIStrings }) {
+  return (
+    <section id="services" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
+      <SectionHeading
+        kicker={t.sections.servicesKicker}
+        title={t.sections.servicesTitle}
+      />
+      <div className="grid gap-6 sm:grid-cols-2">
+        {CORE_SERVICES.map((srv, i) => (
+          <Reveal key={srv.id} delay={i * 90}>
+            <div className="card card-hover flex h-full flex-col p-6 sm:p-7 justify-between">
+              <div>
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <span className="font-mono text-[11px] font-semibold text-(--accent) uppercase tracking-wider">
+                    {srv.category}
+                  </span>
+                  <span className="rounded-full bg-(--chip-bg) px-2.5 py-0.5 font-mono text-[10px] text-(--muted) border border-(--border)">
+                    0{i + 1}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold tracking-tight text-(--foreground)">
+                  {srv.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-(--muted)">
+                  {srv.description}
+                </p>
+
+                <div className="mt-5 space-y-2">
+                  <p className="font-mono text-[11px] font-medium uppercase tracking-wider text-(--foreground)/80">
+                    Key Deliverables:
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-(--muted)">
+                    {srv.deliverables.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-0.5">✔</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-(--border)/60 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-1.5">
+                  {srv.tech.map((t) => (
+                    <span key={t} className="chip !px-2.5 !py-1 !text-[0.68rem]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                {srv.link && (
+                  <Link
+                    href={srv.link}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-(--accent) hover:underline"
+                  >
+                    {srv.linkText || "Learn More →"}
+                  </Link>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
@@ -509,7 +585,7 @@ function ExperienceSection({
       />
       <div className="relative ms-2 space-y-10 border-s border-(--border) ps-8 sm:ms-4 sm:ps-12">
         {content.experience.map((job, i) => (
-          <Reveal key={i} delay={i * 100}>
+          <Reveal key={i} direction="left" delay={i * 90}>
             <div className="relative">
               <span className="absolute top-1.5 -start-[41px] flex size-4 items-center justify-center sm:-start-[57px]">
                 <span className="size-3 rounded-full bg-gradient-to-br from-cyan-400 to-indigo-400 ring-4 ring-cyan-400/15" />
@@ -594,7 +670,7 @@ function ProjectCard({
   );
 
   return (
-    <Reveal delay={delay} className="h-full">
+    <Reveal direction="scale" delay={delay} className="h-full">
       {project.link ? (
         <a
           href={project.link}
@@ -823,7 +899,7 @@ function ContactSection({
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 py-10 sm:py-14">
-        <Reveal>
+        <Reveal direction="scale">
           <div className="card relative overflow-hidden p-8 sm:p-12">
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-500/10 via-transparent to-fuchsia-500/10" />
             <div className="grid gap-12 lg:grid-cols-2">
@@ -880,35 +956,296 @@ function ContactSection({
   );
 }
 
+function AEOFAQSection({ t }: { t: UIStrings }) {
+  const [isSectionOpen, setIsSectionOpen] = useState<boolean>(false);
+  const [openIndices, setOpenIndices] = useState<number[]>([0]);
+
+  const toggleQuestion = (i: number) => {
+    setOpenIndices((prev) =>
+      prev.includes(i) ? prev.filter((idx) => idx !== i) : [...prev, i],
+    );
+  };
+
+  const toggleAllQuestions = () => {
+    if (openIndices.length === HOMEPAGE_FAQS.length) {
+      setOpenIndices([]);
+    } else {
+      setOpenIndices(HOMEPAGE_FAQS.map((_, idx) => idx));
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
+  return (
+    <section id="faq" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
+      {/* FAQ Schema for AEO & Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      {/* Expandable Section Header Card */}
+      <Reveal>
+        <div
+          onClick={() => setIsSectionOpen((prev) => !prev)}
+          className="card card-hover group relative overflow-hidden p-6 sm:p-8 cursor-pointer border border-cyan-500/30 bg-(--surface-2)/60 backdrop-blur-md transition-all duration-300 hover:border-cyan-400"
+          role="button"
+          tabIndex={0}
+          aria-expanded={isSectionOpen}
+          aria-controls="faq-content-container"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setIsSectionOpen((prev) => !prev);
+            }
+          }}
+        >
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-cyan-500/10 via-transparent to-indigo-500/10 opacity-50 transition-opacity group-hover:opacity-100" />
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+                  {t.sections.faqKicker}
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 px-2.5 py-0.5 font-mono text-[10px] text-cyan-300">
+                  <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  {HOMEPAGE_FAQS.length} Q&amp;As
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-(--foreground)">
+                {t.sections.faqTitle}
+              </h2>
+              <p className="text-xs sm:text-sm text-(--muted) max-w-2xl">
+                Click to expand direct answers regarding services, technology stack, project workflows, Dubai local consulting, and remote availability.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-3">
+              <span className="hidden sm:inline-block font-mono text-xs font-semibold text-cyan-300 group-hover:underline">
+                {isSectionOpen ? "Collapse Section" : "Expand Section"}
+              </span>
+              <div
+                className={`flex size-11 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/10 text-cyan-300 font-mono text-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-cyan-400 group-hover:text-slate-950 ${
+                  isSectionOpen ? "rotate-180 bg-cyan-400 text-slate-950" : ""
+                }`}
+              >
+                ↓
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Expandable Section Body */}
+      {isSectionOpen && (
+        <div id="faq-content-container" className="mt-8 animate-in fade-in slide-in-from-top-3 duration-300">
+          <div className="grid gap-8 lg:grid-cols-12 items-start">
+            {/* Left Context Card */}
+            <div className="lg:col-span-4 space-y-4">
+              <div className="card p-6 border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-transparent to-indigo-500/5">
+                <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-(--accent) uppercase tracking-wider mb-2">
+                  <span className="size-2 rounded-full bg-cyan-400 animate-pulse" />
+                  Help &amp; Overview
+                </span>
+                <h3 className="text-lg font-bold text-(--foreground)">
+                  Clear answers for clients &amp; partners
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm text-(--muted) leading-relaxed">
+                  Concise information to help you quickly understand my workflow, technical expertise, and how we can collaborate on your next project.
+                </p>
+
+                {/* Quick Expand Controls */}
+                <div className="mt-5 pt-4 border-t border-(--border)/80 flex flex-col gap-2.5">
+                  <button
+                    onClick={toggleAllQuestions}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 font-mono text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-400/20 hover:border-cyan-400/50 cursor-pointer"
+                  >
+                    <span>
+                      {openIndices.length === HOMEPAGE_FAQS.length
+                        ? "Collapse All Answers ↑"
+                        : "Expand All Answers ↓"}
+                    </span>
+                  </button>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-1 text-xs font-semibold text-(--accent) hover:underline pt-1 text-center"
+                  >
+                    Have a custom question? Contact directly →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Expandable Accordion List */}
+            <div className="lg:col-span-8 space-y-3">
+              <div className="flex items-center justify-between pb-1 px-1">
+                <span className="font-mono text-xs text-(--muted)">
+                  Showing all {HOMEPAGE_FAQS.length} Questions
+                </span>
+                <button
+                  onClick={toggleAllQuestions}
+                  className="text-xs font-medium text-(--accent) hover:underline cursor-pointer"
+                >
+                  {openIndices.length === HOMEPAGE_FAQS.length ? "Collapse All" : "Expand All"}
+                </button>
+              </div>
+
+              {HOMEPAGE_FAQS.map((faq, i) => {
+                const isOpen = openIndices.includes(i);
+                return (
+                  <div
+                    key={i}
+                    className={`card overflow-hidden border transition-all duration-200 ${
+                      isOpen
+                        ? "border-cyan-400/50 bg-(--surface-2)/60 shadow-md shadow-cyan-500/5"
+                        : "border-(--border)/80 hover:border-cyan-400/40 bg-(--card-bg)"
+                    }`}
+                  >
+                    <button
+                      onClick={() => toggleQuestion(i)}
+                      aria-expanded={isOpen}
+                      className="w-full flex items-center justify-between gap-4 p-5 text-start cursor-pointer transition-colors"
+                    >
+                      <span className="flex items-center gap-3 font-semibold text-sm sm:text-base text-(--foreground)">
+                        <span
+                          className={`font-mono text-xs transition-colors ${
+                            isOpen ? "text-cyan-400 font-bold" : "text-(--accent)"
+                          }`}
+                        >
+                          Q{i + 1}.
+                        </span>
+                        {faq.question}
+                      </span>
+                      <span
+                        className={`flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-mono transition-all duration-200 ${
+                          isOpen
+                            ? "rotate-180 bg-cyan-400 text-slate-950 border-cyan-400 font-bold"
+                            : "border-(--border) text-(--muted) hover:border-cyan-400/40"
+                        }`}
+                      >
+                        ↓
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm leading-relaxed text-(--muted) border-t border-(--border)/50 bg-(--surface-2)/40 animate-in fade-in slide-in-from-top-1 duration-200">
+                        <p>{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+              <div className="pt-3 text-center">
+                <button
+                  onClick={() => setIsSectionOpen(false)}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-(--muted) hover:text-(--foreground) hover:underline cursor-pointer"
+                >
+                  <span>Collapse FAQ Section ↑</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function GEOEntitySummarySection() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-6">
+      <Reveal>
+        <div className="card relative overflow-hidden p-6 sm:p-8 border border-cyan-500/20 bg-(--surface-2)/40 backdrop-blur-sm">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-(--border)/70 pb-3">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-400" />
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-(--foreground)">
+                Professional Entity &amp; Verified Summary
+              </h3>
+            </div>
+            <span className="font-mono text-[10px] text-(--accent) rounded-full bg-cyan-500/10 px-2.5 py-0.5 border border-cyan-500/20">
+              Dubai, UAE &amp; Global Availability
+            </span>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-xs">
+            <div>
+              <p className="font-mono text-[11px] font-semibold text-(--accent) uppercase">
+                Identity &amp; Title
+              </p>
+              <p className="mt-1 font-semibold text-(--foreground)">Stibin Augustine</p>
+              <p className="text-(--muted) mt-0.5">
+                Full-Stack Developer &amp; Digital Marketing Specialist
+              </p>
+            </div>
+
+            <div>
+              <p className="font-mono text-[11px] font-semibold text-(--accent) uppercase">
+                Location &amp; Scope
+              </p>
+              <p className="mt-1 font-semibold text-(--foreground)">Bur Dubai, Dubai, UAE</p>
+              <p className="text-(--muted) mt-0.5">
+                On-site UAE roles/consulting + Remote global clients
+              </p>
+            </div>
+
+            <div>
+              <p className="font-mono text-[11px] font-semibold text-(--accent) uppercase">
+                Engineering Stack
+              </p>
+              <p className="mt-1 font-semibold text-(--foreground)">Next.js, React, Flutter, TypeScript</p>
+              <p className="text-(--muted) mt-0.5">
+                Node.js, Dart, Firebase, Supabase, AI APIs &amp; Automations
+              </p>
+            </div>
+
+            <div>
+              <p className="font-mono text-[11px] font-semibold text-(--accent) uppercase">
+                Search &amp; Growth
+              </p>
+              <p className="mt-1 font-semibold text-(--foreground)">SEO, AEO, GEO &amp; PPC Ads</p>
+              <p className="text-(--muted) mt-0.5">
+                Google Ads, Meta Ads, Proven #1 Google Organic Rankings
+              </p>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* Root                                                                */
 /* ------------------------------------------------------------------ */
 
 export default function Portfolio() {
-  // null = still waiting for the first data; never render stale defaults.
-  const [content, setContent] = useState<PortfolioContent | null>(null);
+  // Initialize with DEFAULT_CONTENT so Next.js SSR renders complete HTML for search engines and AI bots!
+  const [content, setContent] = useState<PortfolioContent>(DEFAULT_CONTENT);
 
   useEffect(() => {
     initAnalytics();
     const cached = loadCachedContent();
     if (cached) setContent(cached);
-    
+
     const unsubscribeContent = subscribeContent(setContent);
-    
+
     return () => {
       unsubscribeContent();
     };
   }, []);
-
-  if (!content) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <span className="text-gradient animate-pulse font-mono text-2xl font-bold">
-          &lt;/&gt;
-        </span>
-      </div>
-    );
-  }
 
   const t = STRINGS.en;
 
@@ -923,9 +1260,12 @@ export default function Portfolio() {
       <main>
         <Hero content={content} t={t} />
         <AboutSection content={content} t={t} />
+        <ServicesSection t={t} />
         <SkillsSection content={content} t={t} />
         <ExperienceSection content={content} t={t} />
         <ProjectsSection content={content} t={t} />
+        <GEOEntitySummarySection />
+        <AEOFAQSection t={t} />
         <EducationSection content={content} t={t} />
         <ContactSection content={content} t={t} />
       </main>

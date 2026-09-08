@@ -62,7 +62,7 @@ export default function MarketingHero() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
-                  alt={HERO_DATA.author.name}
+                  alt={`${HERO_DATA.author.name} — Full-Stack Developer & Digital Marketing Specialist in Dubai`}
                   className="size-full rounded-full object-cover bg-(--surface)"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
@@ -232,7 +232,7 @@ export default function MarketingHero() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
-                alt={HERO_DATA.author.name}
+                alt={`${HERO_DATA.author.name} — Full-Stack Developer & Digital Marketing Specialist in Dubai`}
                 className="size-full rounded-[13px] xs:rounded-[21px] sm:rounded-[29px] object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

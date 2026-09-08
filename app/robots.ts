@@ -4,10 +4,15 @@ export default function robots(): MetadataRoute.Robots {
   const siteUrl = "https://stibinaugustine.com";
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: ["/", "/digital-marketing"],
+        disallow: ["/admin", "/admin/*"],
+      },
+    ],
     sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
+

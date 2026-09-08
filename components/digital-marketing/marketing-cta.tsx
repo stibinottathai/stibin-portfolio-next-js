@@ -139,7 +139,7 @@ export default function MarketingCTA() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/avatar.svg"
-                      alt="Stibin Augustine"
+                      alt="Stibin Augustine — Digital Marketer & Developer in Dubai, UAE"
                       className="size-full rounded-full object-cover bg-(--surface)"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

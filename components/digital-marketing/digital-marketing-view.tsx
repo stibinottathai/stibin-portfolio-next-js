@@ -10,6 +10,7 @@ import MarketingProcess from "./marketing-process";
 import ToolsAndTechnologies from "./tools-and-technologies";
 import DeveloperMarketer from "./developer-marketer";
 import MarketingCapabilities from "./marketing-capabilities";
+import MarketingFAQ from "./marketing-faq";
 import ResultsStatement from "./results-statement";
 import MarketingCTA from "./marketing-cta";
 
@@ -33,6 +34,7 @@ export default function DigitalMarketingView() {
         <ToolsAndTechnologies />
         <DeveloperMarketer />
         <MarketingCapabilities />
+        <MarketingFAQ />
         <ResultsStatement />
         <MarketingCTA />
       </main>
