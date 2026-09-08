@@ -59,6 +59,7 @@ function QuickContactForm() {
             maxLength={100}
             placeholder="e.g. Sarah Jenkins"
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            suppressHydrationWarning
           />
         </div>
         <div>
@@ -74,6 +75,7 @@ function QuickContactForm() {
             maxLength={200}
             placeholder="e.g. sarah@business.com"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            suppressHydrationWarning
           />
         </div>
       </div>
@@ -90,6 +92,7 @@ function QuickContactForm() {
           maxLength={3000}
           placeholder="Tell me about your website, SEO, or digital marketing goals..."
           onChange={(e) => setForm({ ...form, message: e.target.value })}
+          suppressHydrationWarning
         />
       </div>
       {state === "error" && (
@@ -100,6 +103,7 @@ function QuickContactForm() {
       <button
         type="submit"
         disabled={state === "sending"}
+        suppressHydrationWarning
         className="w-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-400 px-8 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-transform hover:scale-[1.02] disabled:opacity-50 cursor-pointer"
       >
         {state === "sending" ? "Sending Request…" : "Send Marketing Inquiry →"}

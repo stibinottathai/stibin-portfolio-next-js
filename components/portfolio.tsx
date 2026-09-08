@@ -126,8 +126,9 @@ function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label="Toggle theme"
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      suppressHydrationWarning
       className="group relative flex size-7.5 sm:size-8 items-center justify-center rounded-full border border-(--border) bg-(--surface-2)/80 text-(--muted) transition-all hover:border-cyan-400/50 hover:text-(--foreground) hover:scale-105 active:scale-95 dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-cyan-200 dark:hover:border-cyan-400 cursor-pointer"
     >
       <span className="sr-only">Toggle theme</span>
@@ -758,6 +759,7 @@ function ContactForm({ t }: { t: UIStrings }) {
             maxLength={100}
             placeholder={t.contact.namePlaceholder}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            suppressHydrationWarning
           />
         </div>
         <div>
@@ -773,6 +775,7 @@ function ContactForm({ t }: { t: UIStrings }) {
             maxLength={200}
             placeholder={t.contact.emailPlaceholder}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            suppressHydrationWarning
           />
         </div>
       </div>
@@ -789,6 +792,7 @@ function ContactForm({ t }: { t: UIStrings }) {
           maxLength={3000}
           placeholder={t.contact.messagePlaceholder}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
+          suppressHydrationWarning
         />
       </div>
       {state === "error" && (
@@ -799,6 +803,7 @@ function ContactForm({ t }: { t: UIStrings }) {
       <button
         type="submit"
         disabled={state === "sending"}
+        suppressHydrationWarning
         className="w-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-400 px-8 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-transform hover:scale-[1.02] disabled:opacity-50"
       >
         {state === "sending" ? t.contact.sending : t.contact.send}

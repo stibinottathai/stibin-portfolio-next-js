@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 export default function SiteFooter({ variant = "main" }: FooterProps) {
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string>("/avatar.svg");
 
   useEffect(() => {
     const cached = loadCachedContent();
@@ -33,20 +33,17 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
           {/* Column 1: Brand & Bio (5 cols on lg) */}
           <div className="lg:col-span-5 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3 group">
-              {photo ? (
-                <span className="rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={photo}
-                    alt="Stibin Augustine"
-                    className="size-10 rounded-full object-cover bg-(--surface)"
-                  />
-                </span>
-              ) : (
-                <span className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 font-mono text-sm font-bold text-slate-950 shadow-md transition-transform group-hover:scale-105">
-                  SA
-                </span>
-              )}
+              <span className="rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo || "/avatar.svg"}
+                  alt="Stibin Augustine"
+                  className="size-10 rounded-full object-cover bg-(--surface)"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
+                  }}
+                />
+              </span>
               <div>
                 <h3 className="text-base font-bold text-(--foreground) tracking-tight group-hover:text-cyan-400 dark:group-hover:text-cyan-300 transition-colors">
                   Stibin Augustine
@@ -176,7 +173,7 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
         {/* Bottom Sub-Footer Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-(--muted)">
           <div className="flex flex-wrap items-center gap-2 text-center sm:text-left">
-            <span>© {new Date().getFullYear()} Stibin Augustine. All rights reserved.</span>
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Stibin Augustine. All rights reserved.</span>
           </div>
 
           <div className="flex items-center gap-4">
