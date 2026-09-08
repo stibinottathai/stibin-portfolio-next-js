@@ -73,7 +73,7 @@ function ThemeToggle() {
       onClick={toggle}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="group relative flex size-7.5 sm:size-8 items-center justify-center rounded-full border border-(--border) bg-(--surface-2)/80 text-(--muted) transition-all hover:border-cyan-400/50 hover:text-(--foreground) hover:scale-105 active:scale-95 dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-cyan-200 dark:hover:border-cyan-400 dark:hover:shadow-[0_0_12px_rgba(34,211,238,0.3)] cursor-pointer"
+      className="group relative flex size-7.5 sm:size-8 items-center justify-center rounded-full border border-(--border) bg-(--surface-2)/80 text-(--muted) transition-all hover:border-cyan-400/50 hover:text-(--foreground) hover:scale-105 active:scale-95 dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-cyan-200 dark:hover:border-cyan-400 cursor-pointer"
     >
       <span className="sr-only">Toggle theme</span>
       {theme === null ? (
@@ -111,7 +111,7 @@ export default function MarketingNav() {
         {/* Brand / Profile */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-            <span className="relative flex size-9 sm:size-10 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px] shadow-sm shadow-cyan-500/20 dark:shadow-[0_0_15px_rgba(34,211,238,0.35)] transition-transform group-hover:scale-105">
+            <span className="relative flex size-9 sm:size-10 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px] transition-transform group-hover:scale-105">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photo || "/avatar.svg"}
@@ -137,7 +137,7 @@ export default function MarketingNav() {
         </div>
 
         {/* Center Streamlined Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-1 rounded-full border border-(--border) bg-(--surface-2)/60 p-1 backdrop-blur dark:border-cyan-500/30 dark:bg-slate-900/85 dark:shadow-[0_0_20px_rgba(6,182,212,0.15)] dark:backdrop-blur-xl">
+        <div className="hidden md:flex items-center gap-1 rounded-full border border-(--border) bg-(--surface-2)/60 p-1 backdrop-blur dark:border-cyan-500/30 dark:bg-slate-900/85 dark:backdrop-blur-xl">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -153,7 +153,7 @@ export default function MarketingNav() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3.5 py-1.5 font-mono text-[11px] font-medium text-(--muted) transition-all hover:border-cyan-400 hover:text-(--foreground) dark:border-cyan-500/40 dark:bg-cyan-950/40 dark:text-cyan-200 dark:shadow-[0_0_14px_rgba(34,211,238,0.22)] dark:hover:border-cyan-300 dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
+            className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3.5 py-1.5 font-mono text-[11px] font-medium text-(--muted) transition-all hover:border-cyan-400 hover:text-(--foreground) dark:border-cyan-500/40 dark:bg-cyan-950/40 dark:text-cyan-200 dark:hover:border-cyan-300"
           >
             <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
             ← Developer
@@ -163,7 +163,7 @@ export default function MarketingNav() {
 
           <a
             href="#contact"
-            className="rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 px-4.5 py-1.5 text-xs font-semibold text-slate-950 shadow-md shadow-cyan-500/25 transition-all hover:scale-[1.04] hover:shadow-lg hover:shadow-cyan-500/40 dark:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
+            className="rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 px-4.5 py-1.5 text-xs font-semibold text-slate-950 transition-all hover:scale-[1.04]"
           >
             Let&apos;s Talk
           </a>
@@ -173,7 +173,7 @@ export default function MarketingNav() {
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
-            className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--card-bg) text-(--foreground) dark:border-cyan-500/40 dark:bg-slate-900/80 dark:text-cyan-200 dark:shadow-[0_0_10px_rgba(6,182,212,0.15)]"
+            className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--card-bg) text-(--foreground) dark:border-cyan-500/40 dark:bg-slate-900/80 dark:text-cyan-200"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle navigation menu"
           >
@@ -184,7 +184,7 @@ export default function MarketingNav() {
 
       {/* Mobile Drawer Menu */}
       {open && (
-        <div className="border-t border-(--border) bg-(--background)/95 px-5 py-4 backdrop-blur-xl md:hidden animate-in slide-in-from-top-2 duration-200 dark:bg-slate-950/95 dark:border-cyan-500/25 dark:shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
+        <div className="border-t border-(--border) bg-(--background)/95 px-5 py-4 backdrop-blur-xl md:hidden animate-in slide-in-from-top-2 duration-200 dark:bg-slate-950/95 dark:border-cyan-500/25">
           <div className="flex flex-col space-y-2.5">
             {navLinks.map((link) => (
               <a
@@ -207,7 +207,7 @@ export default function MarketingNav() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="w-full text-center rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 py-2 text-xs font-semibold text-slate-950 shadow-md shadow-cyan-500/20"
+                className="w-full text-center rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 py-2 text-xs font-semibold text-slate-950"
               >
                 Let&apos;s Work Together
               </a>
