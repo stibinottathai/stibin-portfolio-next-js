@@ -59,6 +59,50 @@ function TypedRoles({ roles }: { roles: string[] }) {
 /* Theme + language toggles                                            */
 /* ------------------------------------------------------------------ */
 
+function SunIcon({ className = "size-3.5" }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2" />
+      <path d="M12 20v2" />
+      <path d="m4.93 4.93 1.41 1.41" />
+      <path d="m17.66 17.66 1.41 1.41" />
+      <path d="M2 12h2" />
+      <path d="M20 12h2" />
+      <path d="m6.34 17.66-1.41 1.41" />
+      <path d="m19.07 4.93-1.41 1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon({ className = "size-3.5" }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
 function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light" | null>(null);
 
@@ -83,15 +127,20 @@ function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      title={theme === "dark" ? "Light mode" : "Dark mode"}
-      className="flex size-10 items-center justify-center rounded-full border border-(--border) text-base transition-colors hover:border-cyan-400/40"
+      title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      className="group relative flex size-7.5 sm:size-8 items-center justify-center rounded-full border border-(--border) bg-(--surface-2)/80 text-(--muted) transition-all hover:border-cyan-400/50 hover:text-(--foreground) hover:scale-105 active:scale-95 dark:border-cyan-500/30 dark:bg-slate-900/90 dark:text-cyan-200 dark:hover:border-cyan-400 dark:hover:shadow-[0_0_12px_rgba(34,211,238,0.3)] cursor-pointer"
     >
-      {theme === null ? "◐" : theme === "dark" ? "☀️" : "🌙"}
+      <span className="sr-only">Toggle theme</span>
+      {theme === null ? (
+        <span className="size-2 rounded-full bg-(--muted)/40 animate-pulse" />
+      ) : theme === "dark" ? (
+        <SunIcon className="size-3.5 transition-transform duration-300 group-hover:rotate-45 text-amber-300" />
+      ) : (
+        <MoonIcon className="size-3.5 transition-transform duration-300 group-hover:-rotate-12 text-slate-700" />
+      )}
     </button>
   );
 }
-
-
 
 /* ------------------------------------------------------------------ */
 /* Navigation                                                          */
@@ -107,11 +156,6 @@ function Nav({
   t: UIStrings;
 }) {
   const [open, setOpen] = useState(false);
-  const initials = name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("");
 
   const links = [
     { href: "#about", label: t.nav.about },
@@ -123,90 +167,112 @@ function Nav({
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-(--border) bg-(--background)/75 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-(--border) bg-(--background)/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#top" className="flex items-center gap-2.5">
-          {photoUrl ? (
-            <span className="rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
-              {/* eslint-disable-next-line @next/next/no-img-element -- src can be a data URI or any external host set from the admin panel */}
+        {/* Brand / Profile */}
+        <div className="flex items-center gap-3">
+          <a href="#top" className="flex items-center gap-2.5 sm:gap-3 group">
+            <span className="relative flex size-9 sm:size-10 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px] shadow-sm shadow-cyan-500/20 dark:shadow-[0_0_15px_rgba(34,211,238,0.35)] transition-transform group-hover:scale-105">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={photoUrl}
+                src={photoUrl || "/avatar.svg"}
                 alt={name}
-                className="block size-9 rounded-full object-cover"
+                className="size-full rounded-full object-cover bg-(--surface)"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
+                }}
               />
+              <span className="absolute -bottom-0.5 -end-0.5 flex size-2.5 items-center justify-center rounded-full bg-(--surface)">
+                <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              </span>
             </span>
-          ) : (
-            <span className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 font-mono text-sm font-bold text-slate-950">
-              {initials}
-            </span>
-          )}
-          <span className="text-sm font-semibold tracking-wide">{name}</span>
-        </a>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold tracking-tight text-(--foreground) transition-all group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-300 group-hover:via-indigo-300 group-hover:to-fuchsia-300">
+                {name}
+              </span>
+              <span className="font-mono text-[9px] tracking-wider uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 dark:from-cyan-300 dark:via-indigo-300 dark:to-fuchsia-300">
+                Flutter &amp; Web Developer
+              </span>
+            </div>
+          </a>
+        </div>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        {/* Center Streamlined Desktop Nav Links (Floating Glass Pill) */}
+        <div className="hidden md:flex items-center gap-1 rounded-full border border-(--border) bg-(--surface-2)/60 p-1 backdrop-blur dark:border-cyan-500/30 dark:bg-slate-900/85 dark:shadow-[0_0_20px_rgba(6,182,212,0.15)] dark:backdrop-blur-xl">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-(--muted) transition-colors hover:text-(--foreground)"
+              className="rounded-full px-3.5 py-1 text-xs font-medium text-(--muted) transition-all hover:bg-(--surface) hover:text-(--foreground) dark:hover:bg-gradient-to-r dark:hover:from-cyan-500/20 dark:hover:to-indigo-500/20 dark:hover:text-cyan-200 dark:hover:border dark:hover:border-cyan-400/30"
             >
               {l.label}
             </a>
           ))}
+        </div>
+
+        {/* Right Desktop Actions */}
+        <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/digital-marketing"
-            className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3 py-1 text-xs font-medium text-(--muted) transition-colors hover:border-cyan-400/40 hover:text-(--foreground)"
+            className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3.5 py-1.5 font-mono text-[11px] font-medium text-(--muted) transition-all hover:border-cyan-400 hover:text-(--foreground) dark:border-cyan-500/40 dark:bg-cyan-950/40 dark:text-cyan-200 dark:shadow-[0_0_14px_rgba(34,211,238,0.22)] dark:hover:border-cyan-300 dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
           >
-            <span className="size-1.5 rounded-full bg-cyan-400" />
-            Digital Marketing
+            <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            Marketing →
           </Link>
+
           <ThemeToggle />
+
           <a
             href="#contact"
-            className="rounded-full bg-(--foreground) px-4 py-2 text-sm font-semibold text-(--background) transition-opacity hover:opacity-85"
+            className="rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 px-4.5 py-1.5 text-xs font-semibold text-slate-950 shadow-md shadow-cyan-500/25 transition-all hover:scale-[1.04] hover:shadow-lg hover:shadow-cyan-500/40 dark:shadow-[0_0_18px_rgba(99,102,241,0.35)]"
           >
             {t.nav.hireMe}
           </a>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <Link
-            href="/digital-marketing"
-            className="rounded-full border border-(--border) px-2.5 py-1 text-[11px] text-(--muted)"
-          >
-            Marketing
-          </Link>
+        {/* Mobile Actions */}
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
-            className="flex size-10 items-center justify-center rounded-lg border border-(--border)"
+            className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--card-bg) text-(--foreground) dark:border-cyan-500/40 dark:bg-slate-900/80 dark:text-cyan-200 dark:shadow-[0_0_10px_rgba(6,182,212,0.15)]"
             onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
           >
-            <span className="text-lg">{open ? "✕" : "☰"}</span>
+            <span className="text-base">{open ? "✕" : "☰"}</span>
           </button>
         </div>
       </nav>
 
+      {/* Mobile Drawer Menu */}
       {open && (
-        <div className="border-t border-(--border) bg-(--background)/95 px-5 py-4 backdrop-blur-xl lg:hidden">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block py-2.5 text-sm text-(--muted) hover:text-(--foreground)"
-            >
-              {l.label}
-            </a>
-          ))}
-          <div className="pt-2 mt-2 border-t border-(--border)">
-            <Link
-              href="/digital-marketing"
-              onClick={() => setOpen(false)}
-              className="block py-1 text-sm font-medium text-(--accent)"
-            >
-              ✦ Digital Marketing &amp; SEO Services →
-            </Link>
+        <div className="border-t border-(--border) bg-(--background)/95 px-5 py-4 backdrop-blur-xl md:hidden animate-in slide-in-from-top-2 duration-200 dark:bg-slate-950/95 dark:border-cyan-500/25 dark:shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
+          <div className="flex flex-col space-y-2.5">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="py-1 text-sm font-medium text-(--muted) transition-colors hover:text-(--foreground) dark:hover:text-cyan-300"
+              >
+                {l.label}
+              </a>
+            ))}
+            <div className="pt-3 border-t border-(--border) dark:border-cyan-500/20 flex flex-col gap-2.5">
+              <Link
+                href="/digital-marketing"
+                onClick={() => setOpen(false)}
+                className="text-xs font-medium text-(--accent)"
+              >
+                ✦ Digital Marketing &amp; SEO Services →
+              </Link>
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="w-full text-center rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 py-2 text-xs font-semibold text-slate-950 shadow-md shadow-cyan-500/20"
+              >
+                {t.nav.hireMe}
+              </a>
+            </div>
           </div>
         </div>
       )}
