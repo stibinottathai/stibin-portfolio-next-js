@@ -5,17 +5,17 @@ import Reveal from "@/components/reveal";
 
 export default function MarketingProcess() {
   return (
-    <section id="process" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:py-28">
+    <section id="process" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
       {/* Section Header */}
       <Reveal>
-        <div className="mb-14 sm:mb-16">
-          <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+        <div className="mb-6 sm:mb-8">
+          <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
             03 · Methodology
           </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            How I Approach Digital Marketing
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+            How I Approach Digital Marketing &amp; Growth
           </h2>
-          <p className="mt-3 max-w-2xl text-base text-(--muted) sm:text-lg">
+          <p className="mt-2 max-w-2xl text-xs sm:text-sm text-(--muted)">
             A structured, analytical five-step framework engineered for lasting search visibility and sustainable conversions.
           </p>
         </div>
@@ -26,10 +26,10 @@ export default function MarketingProcess() {
         {/* Continuous connector line on desktop */}
         <div className="hidden lg:block absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-cyan-400 via-indigo-400 to-fuchsia-400 opacity-25" />
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {MARKETING_PROCESS_STEPS.map((step, idx) => (
             <Reveal key={step.step} delay={idx * 80}>
-              <div className="card card-hover relative overflow-hidden p-6 sm:p-8 transition-all">
+              <div className="card card-hover relative overflow-hidden p-5 sm:p-6 transition-all">
                 <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
                   {/* Step Number & Title */}
                   <div className="lg:col-span-4 flex items-center gap-4">

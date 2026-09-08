@@ -12,6 +12,7 @@ import { initAnalytics } from "@/lib/firebase";
 import { sendMessage } from "@/lib/messages";
 import { STRINGS, type UIStrings } from "@/lib/i18n";
 import Reveal from "./reveal";
+import SiteFooter from "./site-footer";
 
 /* ------------------------------------------------------------------ */
 /* Typing effect for hero roles                                        */
@@ -803,24 +804,7 @@ function ContactSection({
         </Reveal>
       </div>
 
-      <footer className="border-t border-(--border) py-8 text-center text-xs text-(--muted)">
-        <p>{t.footer(hero.name, new Date().getFullYear())}</p>
-        <div className="mt-2 flex items-center justify-center gap-4">
-          <Link
-            href="/digital-marketing"
-            className="text-xs text-(--accent) transition-opacity hover:opacity-80"
-          >
-            Digital Marketing &amp; SEO Services
-          </Link>
-          <span className="opacity-30">·</span>
-          <Link
-            href="/admin"
-            className="opacity-40 transition-opacity hover:opacity-100"
-          >
-            Admin
-          </Link>
-        </div>
-      </footer>
+      <SiteFooter variant="main" />
     </section>
   );
 }

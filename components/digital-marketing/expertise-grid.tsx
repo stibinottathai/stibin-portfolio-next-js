@@ -5,24 +5,24 @@ import Reveal from "@/components/reveal";
 
 export default function ExpertiseGrid() {
   return (
-    <section id="expertise" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:py-24">
+    <section id="expertise" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
       {/* Section Header */}
       <Reveal>
-        <div className="mb-12 sm:mb-16">
-          <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+        <div className="mb-6 sm:mb-8">
+          <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
             01 · What I Do
           </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Digital Marketing Expertise
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+            Digital Marketing &amp; Paid Growth Expertise
           </h2>
-          <p className="mt-3 max-w-2xl text-base text-(--muted) sm:text-lg">
-            A combination of strategy, content, search optimization and technical execution.
+          <p className="mt-2 max-w-2xl text-xs sm:text-sm text-(--muted)">
+            A combination of SEO, paid advertising (Google &amp; Meta Ads), content strategy, social media, and technical execution.
           </p>
         </div>
       </Reveal>
 
-      {/* 6 Cards Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* Cards Grid */}
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {EXPERTISE_CARDS.map((card, idx) => (
           <Reveal key={card.id} delay={idx * 70} className="h-full">
             <div className="card card-hover flex h-full flex-col p-6 sm:p-7 group relative overflow-hidden">

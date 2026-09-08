@@ -5,24 +5,24 @@ import Reveal from "@/components/reveal";
 
 export default function ToolsAndTechnologies() {
   return (
-    <section id="tools" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:py-24">
+    <section id="tools" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14">
       {/* Section Header */}
       <Reveal>
-        <div className="mb-12 sm:mb-16">
-          <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+        <div className="mb-6 sm:mb-8">
+          <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
             04 · Stack &amp; Tooling
           </p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
             Tools &amp; Technologies
           </h2>
-          <p className="mt-3 max-w-2xl text-base text-(--muted) sm:text-lg">
+          <p className="mt-2 max-w-2xl text-xs sm:text-sm text-(--muted)">
             Practical platforms, analytical suites, and modern frameworks leveraged to research, execute, and scale digital marketing.
           </p>
         </div>
       </Reveal>
 
       {/* Categorized Pill Cards */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {TOOLS_DATA.map((group, idx) => (
           <Reveal key={group.category} delay={idx * 80}>
             <div className="card card-hover flex h-full flex-col p-6 sm:p-7 group">

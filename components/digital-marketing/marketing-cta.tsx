@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MARKETING_CTA } from "@/lib/marketing-content";
 import { sendMessage } from "@/lib/messages";
 import Reveal from "@/components/reveal";
+import SiteFooter from "@/components/site-footer";
 
 function QuickContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -109,28 +110,28 @@ function QuickContactForm() {
 
 export default function MarketingCTA() {
   return (
-    <section id="contact" className="relative scroll-mt-24 overflow-hidden pt-12 pb-24 sm:pb-32">
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden py-10 sm:py-14">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <div className="card relative overflow-hidden p-8 sm:p-12 lg:p-14">
+          <div className="card relative overflow-hidden p-6 sm:p-8 lg:p-10">
             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-500/10 via-transparent to-fuchsia-500/10" />
 
-            <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               {/* Left Column: Heading & Copy */}
               <div className="lg:col-span-6">
-                <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+                <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
                   08 · Let&apos;s Collaborate
                 </p>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
                   {MARKETING_CTA.heading}
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-(--muted)">
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-(--muted)">
                   {MARKETING_CTA.description}
                 </p>
 
                 {/* Author Snippet */}
-                <div className="mt-8 flex items-center gap-3.5 rounded-2xl border border-(--border) bg-(--surface-2)/60 p-3 max-w-sm">
-                  <div className="size-11 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+                <div className="mt-5 flex items-center gap-3 rounded-xl border border-(--border) bg-(--surface-2)/60 p-2.5 max-w-sm">
+                  <div className="size-9 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/avatar.svg"
@@ -139,35 +140,35 @@ export default function MarketingCTA() {
                     />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-(--foreground)">Stibin Augustine</p>
+                    <p className="text-xs sm:text-sm font-bold text-(--foreground)">Stibin Augustine</p>
                     <p className="font-mono text-[10px] text-(--accent)">Digital Marketer &amp; Developer</p>
                   </div>
                 </div>
 
                 {/* Direct info list */}
-                <div className="mt-5 space-y-2.5 text-sm text-(--muted)">
+                <div className="mt-4 space-y-2 text-xs sm:text-sm text-(--muted)">
                   <a
                     href="mailto:stibinaugustine3047@gmail.com"
-                    className="flex items-center gap-3 transition-colors hover:text-(--accent)"
+                    className="flex items-center gap-2.5 transition-colors hover:text-(--accent)"
                   >
                     <span aria-hidden>✉️</span> stibinaugustine3047@gmail.com
                   </a>
                   <a
                     href="tel:+971565564136"
-                    className="flex items-center gap-3 transition-colors hover:text-(--accent)"
+                    className="flex items-center gap-2.5 transition-colors hover:text-(--accent)"
                   >
                     <span aria-hidden>📞</span> +971 56 556 4136
                   </a>
-                  <p className="flex items-center gap-3">
+                  <p className="flex items-center gap-2.5">
                     <span aria-hidden>📍</span> Dubai, United Arab Emirates
                   </p>
                 </div>
 
                 {/* Actions */}
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-2 rounded-full border border-(--border) bg-(--chip-bg) px-6 py-2.5 text-xs font-semibold text-(--foreground) transition-colors hover:border-cyan-400/40 hover:bg-(--surface-2)"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-5 py-2 text-xs font-semibold text-(--foreground) transition-colors hover:border-cyan-400/40 hover:bg-(--surface-2)"
                   >
                     <span>←</span>
                     {MARKETING_CTA.secondaryButton.label}
@@ -176,8 +177,8 @@ export default function MarketingCTA() {
               </div>
 
               {/* Right Column: Contact Form */}
-              <div className="lg:col-span-6 rounded-2xl border border-(--border) bg-(--surface)/70 p-6 sm:p-8 backdrop-blur">
-                <p className="mb-4 font-mono text-xs font-semibold text-(--accent) uppercase tracking-wider">
+              <div className="lg:col-span-6 rounded-2xl border border-(--border) bg-(--surface)/70 p-5 sm:p-6 backdrop-blur">
+                <p className="mb-3 font-mono text-xs font-semibold text-(--accent) uppercase tracking-wider">
                   Direct Project Inquiry
                 </p>
                 <QuickContactForm />
@@ -187,26 +188,8 @@ export default function MarketingCTA() {
         </Reveal>
       </div>
 
-      {/* Footer */}
-      <footer className="mt-20 border-t border-(--border) pt-8 text-center text-xs text-(--muted)">
-        <div className="mx-auto max-w-6xl px-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Stibin Augustine. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/" className="hover:text-(--foreground) transition-colors">
-              Developer Portfolio
-            </Link>
-            <a href="#expertise" className="hover:text-(--foreground) transition-colors">
-              Expertise
-            </a>
-            <a href="#process" className="hover:text-(--foreground) transition-colors">
-              Process
-            </a>
-            <a href="#contact" className="hover:text-(--foreground) transition-colors">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Redesigned Premium Site Footer */}
+      <SiteFooter variant="marketing" />
     </section>
   );
 }

@@ -52,10 +52,11 @@ export default function MarketingNav() {
   }, []);
 
   const navLinks = [
+    { href: "#case-studies", label: "Results" },
     { href: "#expertise", label: "Expertise" },
-    { href: "#evolution", label: "Search & AI" },
+    { href: "#evolution", label: "Search Evolution" },
+    { href: "#ai-stack", label: "AI Stack" },
     { href: "#process", label: "Process" },
-    { href: "#tools", label: "Tools" },
     { href: "#advantage", label: "Tech Advantage" },
     { href: "#capabilities", label: "Capabilities" },
   ];

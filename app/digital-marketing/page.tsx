@@ -5,18 +5,41 @@ const siteUrl = "https://stibinaugustine.com";
 const pageUrl = `${siteUrl}/digital-marketing`;
 
 export const metadata: Metadata = {
-  title: "Digital Marketing, SEO, AEO & GEO Expertise",
+  title: "Digital Marketing, SEO, Google Ads, Meta Ads & AI Growth",
   description:
-    "Strategic Digital Marketing and Technical Search Optimization by Stibin Augustine. Combining SEO, AEO, GEO, content strategy, analytics, and full-stack development to build discoverable, high-converting digital experiences.",
+    "Strategic Digital Marketing, Performance Advertising (Google Ads & Meta Ads), Social Media Management, and Technical SEO by Stibin Augustine. Ranked #1 on Google for high-intent keywords, combining full-stack development with AI automation.",
   keywords: [
     "Digital Marketing",
+    "Google Ads",
+    "Google Ads Expert",
+    "Meta Ads",
+    "Facebook Ads",
+    "Instagram Ads",
+    "PPC Advertising",
+    "Social Media Management",
+    "Social Media Marketing",
     "SEO Expert",
     "Technical SEO",
+    "Ranked #1 Google",
+    "Buy laptops from dubai to india",
+    "Btbanana",
+    "Brandovastudio",
     "AEO Optimization",
     "Answer Engine Optimization",
     "GEO Optimization",
     "Generative Engine Optimization",
     "AI Search Visibility",
+    "ChatGPT",
+    "Claude",
+    "Claude Code",
+    "Gemini",
+    "Perplexity",
+    "Adobe Firefly",
+    "Canva AI",
+    "Prompt Engineering",
+    "AI Copywriting",
+    "AI Agents",
+    "AI Automation",
     "Content Strategy",
     "Local SEO",
     "Google Search Console",
@@ -25,6 +48,7 @@ export const metadata: Metadata = {
     "Landing Page Optimization",
     "Conversion Optimization",
     "Developer Marketer",
+    "PHP Website Upgrade",
     "Dubai SEO",
     "UAE Digital Marketing",
     "Stibin Augustine Marketing",
@@ -33,9 +57,9 @@ export const metadata: Metadata = {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Digital Marketing, SEO, AEO & GEO Expertise — Stibin Augustine",
+    title: "Digital Marketing, SEO, Google Ads, Meta Ads & AI Growth — Stibin Augustine",
     description:
-      "Strategic Digital Marketing and Technical Search Optimization. Combining SEO, AEO, GEO, analytics, and full-stack development for search visibility and growth.",
+      "Strategic Digital Marketing, Performance Ads (Google & Meta), Social Media Management, and Technical SEO. Proven #1 Google rankings and high-conversion web engineering.",
     url: pageUrl,
     siteName: "Stibin Augustine Portfolio",
     locale: "en_US",
@@ -43,9 +67,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Marketing, SEO, AEO & GEO Expertise — Stibin Augustine",
+    title: "Digital Marketing, SEO, Google Ads, Meta Ads & AI Growth — Stibin Augustine",
     description:
-      "Strategic Digital Marketing and Technical Search Optimization for modern search engines and AI discovery platforms.",
+      "Strategic Digital Marketing, Google Ads, Meta Ads, Social Media Strategy, and Technical Search Optimization.",
   },
 };
 
@@ -53,10 +77,10 @@ export default function DigitalMarketingPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Stibin Augustine — Digital Marketing & SEO Services",
+    name: "Stibin Augustine — Digital Marketing, Ads & SEO Services",
     url: pageUrl,
     description:
-      "Strategic Digital Marketing, Technical SEO, AEO, and GEO optimization services combining marketing strategy with modern web development.",
+      "Strategic Digital Marketing, Google Ads, Meta Ads Management, Social Media Strategy, Technical SEO, AEO, and GEO optimization services combining marketing strategy with modern web engineering.",
     provider: {
       "@type": "Person",
       name: "Stibin Augustine",
@@ -70,30 +94,54 @@ export default function DigitalMarketingPage() {
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Digital Marketing & SEO Services",
+      name: "Digital Marketing, Paid Ads & SEO Services",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Search Engine Optimization (SEO)",
-            description: "Technical SEO, On-page SEO, Keyword research, and SEO audits.",
+            name: "Search Engine Optimization (SEO & #1 Rankings)",
+            description: "Technical SEO, On-page SEO, Commercial intent keyword research, and rank #1 execution.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Answer Engine Optimization (AEO)",
-            description: "Structuring content for direct answers and AI search snippet visibility.",
+            name: "Google Ads & PPC Campaign Management",
+            description: "Search Ads, Display campaigns, Performance Max, and high-conversion landing page funnels.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Generative Engine Optimization (GEO)",
-            description: "Optimizing digital presence and entity signals for generative AI engines.",
+            name: "Meta Ads (Facebook & Instagram Advertising)",
+            description: "Audience targeting, lookalikes, creative split testing, and retargeting funnels.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Social Media Management & Strategy",
+            description: "Brand growth, content calendar scheduling, community engagement, and multi-channel distribution.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI & Generative Engine Optimization (GEO / AEO)",
+            description: "Optimizing digital presence and entity signals for ChatGPT, Perplexity, Gemini, and generative AI search.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI Tools & Workflow Automation",
+            description: "Implementing AI agents, prompt engineering, and automated content generation workflows.",
           },
         },
         {
@@ -101,7 +149,7 @@ export default function DigitalMarketingPage() {
           itemOffered: {
             "@type": "Service",
             name: "Content Strategy & Copywriting",
-            description: "Intent-driven content planning, landing page copy, and search optimization.",
+            description: "Intent-driven content planning, AI-assisted copywriting, and search optimization.",
           },
         },
         {
@@ -116,8 +164,8 @@ export default function DigitalMarketingPage() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Analytics & Performance Reporting",
-            description: "Google Analytics 4, Search Console monitoring, and conversion tracking.",
+            name: "Full-Stack Website Development & Modernization",
+            description: "Next.js, React, and PHP platform upgrades engineered for speed and search dominance.",
           },
         },
       ],

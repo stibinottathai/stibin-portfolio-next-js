@@ -7,7 +7,7 @@ export default function DeveloperMarketer() {
   const { marketingPillar, techPillar } = DEVELOPER_ADVANTAGE;
 
   return (
-    <section id="advantage" className="relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+    <section id="advantage" className="relative scroll-mt-24 overflow-hidden py-10 sm:py-14">
       {/* Subtle radial glow */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.06),transparent_70%)] pointer-events-none" />
 
@@ -15,20 +15,20 @@ export default function DeveloperMarketer() {
         {/* Section Header */}
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
-            <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+            <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
               05 · The Hybrid Edge
             </p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
               {DEVELOPER_ADVANTAGE.heading}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-(--muted) sm:text-lg">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-(--muted)">
               {DEVELOPER_ADVANTAGE.copy}
             </p>
           </div>
         </Reveal>
 
         {/* Dual Pillar Comparison with Central Connector */}
-        <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div className="mt-6 sm:mt-8 grid gap-6 lg:grid-cols-12 lg:items-center">
           {/* Column 1: Digital Marketing */}
           <Reveal delay={100} className="lg:col-span-5 h-full">
             <div className="card card-hover flex h-full flex-col p-7 sm:p-8 border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.03] to-transparent">
@@ -109,8 +109,8 @@ export default function DeveloperMarketer() {
         </div>
 
         {/* Central Visual Banner Statement */}
-        <Reveal delay={350} className="mt-10">
-          <div className="card relative overflow-hidden p-6 sm:p-8 text-center bg-(--surface-2)/60 border-cyan-400/30 shadow-xl">
+        <Reveal delay={350} className="mt-6 sm:mt-8">
+          <div className="card relative overflow-hidden p-5 sm:p-6 text-center bg-(--surface-2)/60 border-cyan-400/30 shadow-xl">
             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-cyan-500/10 via-indigo-500/10 to-fuchsia-500/10 opacity-70" />
             <h4 className="text-xl sm:text-2xl font-bold tracking-tight text-(--foreground)">
               <span className="text-gradient">

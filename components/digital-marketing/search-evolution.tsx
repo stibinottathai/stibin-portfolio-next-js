@@ -5,7 +5,7 @@ import Reveal from "@/components/reveal";
 
 export default function SearchEvolution() {
   return (
-    <section id="evolution" className="relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+    <section id="evolution" className="relative scroll-mt-24 overflow-hidden py-10 sm:py-14">
       {/* Background glow accent */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-cyan-500/[0.03] to-transparent pointer-events-none" />
 
@@ -13,31 +13,31 @@ export default function SearchEvolution() {
         {/* Section Heading */}
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
-            <p className="mb-2 font-mono text-xs font-semibold tracking-[0.25em] text-(--accent) uppercase">
+            <p className="mb-1.5 font-mono text-[11px] font-semibold tracking-[0.25em] text-(--accent) uppercase">
               02 · The Modern Landscape
             </p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
               From Search Engines to <span className="text-gradient">AI Engines</span>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-(--muted) sm:text-lg">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-(--muted)">
               Search is changing. Visibility is no longer only about ranking a webpage. Modern digital marketing also requires being present where people ask questions, compare businesses and discover information through AI.
             </p>
           </div>
         </Reveal>
 
         {/* Horizontal Visual Progression Banner */}
-        <Reveal delay={120} className="mt-14">
-          <div className="card relative overflow-hidden p-6 sm:p-8 bg-(--surface-2)/40 border-(--border)/80 shadow-lg">
-            <div className="mb-4 flex items-center justify-between">
+        <Reveal delay={120} className="mt-6 sm:mt-8">
+          <div className="card relative overflow-hidden p-5 sm:p-6 bg-(--surface-2)/40 border-(--border)/80 shadow-lg">
+            <div className="mb-3.5 flex items-center justify-between">
               <span className="font-mono text-xs font-bold tracking-wider text-(--accent) uppercase">
                 The Search Evolution Timeline
               </span>
-              <span className="rounded-full bg-cyan-400/10 px-2.5 py-0.5 font-mono text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold">
+              <span className="rounded-full bg-cyan-400/10 px-2 py-0.5 font-mono text-[10px] text-cyan-600 dark:text-cyan-400 font-semibold">
                 Multi-Generational Visibility
               </span>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
               {EVOLUTION_STEPS.map((step, idx) => (
                 <div
                   key={step.label}
@@ -70,7 +70,7 @@ export default function SearchEvolution() {
         </Reveal>
 
         {/* Three Large Comparison Cards: SEO, AEO, GEO */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-6 sm:mt-8 grid gap-5 lg:grid-cols-3">
           {EVOLUTION_CARDS.map((card, idx) => (
             <Reveal key={card.id} delay={idx * 100} className="h-full">
               <div className="card card-hover flex h-full flex-col p-7 relative overflow-hidden group">

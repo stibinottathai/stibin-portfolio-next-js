@@ -2,8 +2,10 @@
 
 import MarketingNav from "./marketing-nav";
 import MarketingHero from "./marketing-hero";
+import CaseStudies from "./case-studies";
 import ExpertiseGrid from "./expertise-grid";
 import SearchEvolution from "./search-evolution";
+import AICapabilities from "./ai-capabilities";
 import MarketingProcess from "./marketing-process";
 import ToolsAndTechnologies from "./tools-and-technologies";
 import DeveloperMarketer from "./developer-marketer";
@@ -23,8 +25,10 @@ export default function DigitalMarketingView() {
       {/* Main Content Assembly */}
       <main>
         <MarketingHero />
+        <CaseStudies />
         <ExpertiseGrid />
         <SearchEvolution />
+        <AICapabilities />
         <MarketingProcess />
         <ToolsAndTechnologies />
         <DeveloperMarketer />
