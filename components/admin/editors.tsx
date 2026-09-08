@@ -195,7 +195,6 @@ export function HeroEditor({
         value={hero.tagline}
         onChange={(v) => set({ tagline: v })}
         rows={3}
-        aiContext="portfolio hero tagline"
       />
       <div className="grid gap-4 sm:grid-cols-2">
         <TextField label="Email" value={hero.email} onChange={(v) => set({ email: v })} />
@@ -239,7 +238,6 @@ export function AboutEditor({
         value={about.summary}
         onChange={(v) => patch({ about: { ...about, summary: v } })}
         rows={7}
-        aiContext="professional summary (about section)"
       />
       <div>
         <label className="label">Stats</label>
@@ -437,7 +435,6 @@ export function ProjectsEditor({
             value={p.description}
             onChange={(v) => ops.update(i, { ...p, description: v })}
             rows={3}
-            aiContext="project description"
           />
           <StringList
             label="Tech stack"

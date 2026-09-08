@@ -1,20 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   loadCachedContent,
-  mergeWithDefaults,
   subscribeContent,
   type PortfolioContent,
   type Project,
 } from "@/lib/content";
-import { auth, initAnalytics, isAdminEmail } from "@/lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { initAnalytics } from "@/lib/firebase";
 import { sendMessage } from "@/lib/messages";
 import { STRINGS, type UIStrings } from "@/lib/i18n";
-import ChatWidget from "./chat-widget";
-import JobFit from "./job-fit";
 import Reveal from "./reveal";
 
 /* ------------------------------------------------------------------ */
@@ -104,12 +100,10 @@ function Nav({
   name,
   photoUrl,
   t,
-  isAdmin,
 }: {
   name: string;
   photoUrl: string;
   t: UIStrings;
-  isAdmin: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const initials = name
@@ -124,7 +118,6 @@ function Nav({
     { href: "#experience", label: t.nav.experience },
     { href: "#projects", label: t.nav.projects },
     { href: "#education", label: t.nav.education },
-    ...(isAdmin ? [{ href: "#job-fit", label: t.nav.jobFit }] : []),
     { href: "#contact", label: t.nav.contact },
   ];
 
@@ -808,21 +801,15 @@ function ContactSection({
 export default function Portfolio() {
   // null = still waiting for the first data; never render stale defaults.
   const [content, setContent] = useState<PortfolioContent | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     initAnalytics();
     const cached = loadCachedContent();
     if (cached) setContent(cached);
     
-    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(isAdminEmail(user?.email));
-    });
-    
     const unsubscribeContent = subscribeContent(setContent);
     
     return () => {
-      unsubscribeAuth();
       unsubscribeContent();
     };
   }, []);
@@ -846,7 +833,6 @@ export default function Portfolio() {
         name={content.hero.name}
         photoUrl={content.hero.photoUrl}
         t={t}
-        isAdmin={isAdmin}
       />
       <main>
         <Hero content={content} t={t} />
@@ -855,11 +841,8 @@ export default function Portfolio() {
         <ExperienceSection content={content} t={t} />
         <ProjectsSection content={content} t={t} />
         <EducationSection content={content} t={t} />
-        {isAdmin && <JobFit t={t} />}
         <ContactSection content={content} t={t} />
       </main>
-
-      <ChatWidget name={content.hero.name} />
     </div>
   );
 }

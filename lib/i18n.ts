@@ -11,7 +11,6 @@ export const STRINGS = {
       experience: "Experience",
       projects: "Projects",
       education: "Education",
-      jobFit: "Job Fit",
       contact: "Contact",
       hireMe: "Hire Me",
     },
@@ -32,19 +31,9 @@ export const STRINGS = {
       projectsTitle: "Things I've built",
       educationKicker: "05 · Education",
       educationTitle: "Learning never stops",
-      jobFitKicker: "AI · Job Fit",
-      jobFitTitle: "Hiring? Check the fit",
       contactKicker: "06 · Contact",
     },
     projects: { all: "All", mobile: "Mobile", web: "Web" },
-    jobFit: {
-      blurb:
-        "Paste a job description below and AI will honestly analyse how well my skills and experience match the role — grounded in this portfolio's real content.",
-      placeholder: "Paste the job description here…",
-      analyze: "Analyze Fit ✨",
-      analyzing: "Analyzing…",
-      tooShort: "Please paste a fuller job description (a few lines at least).",
-    },
     contact: {
       titleA: "Let's build something",
       titleB: "great together",

@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { auth } from "@/lib/firebase";
-
 /* Small reusable form controls shared by the admin section editors. */
 
 export function TextField({
@@ -34,101 +31,21 @@ export function TextArea({
   value,
   onChange,
   rows = 4,
-  aiContext,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   rows?: number;
-  /** When set, shows an "Improve with AI" button; describes the field to the model (e.g. "professional summary"). */
-  aiContext?: string;
 }) {
-  const [aiBusy, setAiBusy] = useState(false);
-  const [aiError, setAiError] = useState<string | null>(null);
-  const [previous, setPrevious] = useState<string | null>(null);
-
-  const improve = async () => {
-    if (!value.trim() || aiBusy) return;
-    setAiBusy(true);
-    setAiError(null);
-    const original = value;
-    try {
-      const idToken = await auth.currentUser?.getIdToken();
-      const res = await fetch("/api/ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          task: "improve",
-          text: original,
-          context: aiContext,
-          idToken,
-        }),
-      });
-      if (!res.ok || !res.body) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error ?? "AI is unavailable right now.");
-      }
-      setPrevious(original);
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let out = "";
-      for (;;) {
-        const { done, value: chunk } = await reader.read();
-        if (done) break;
-        out += decoder.decode(chunk, { stream: true });
-        onChange(out);
-      }
-      if (!out.trim()) {
-        onChange(original);
-        setPrevious(null);
-        throw new Error("AI returned nothing — please try again.");
-      }
-    } catch (err) {
-      setAiError(err instanceof Error ? err.message : "AI request failed.");
-    } finally {
-      setAiBusy(false);
-    }
-  };
-
   return (
     <div>
-      <div className="mb-0.5 flex items-center justify-between gap-3">
-        <label className="label !mb-0">{label}</label>
-        {aiContext && (
-          <div className="flex items-center gap-3">
-            {previous !== null && !aiBusy && (
-              <button
-                type="button"
-                onClick={() => {
-                  onChange(previous);
-                  setPrevious(null);
-                }}
-                className="text-[0.7rem] font-medium text-(--muted) hover:text-(--foreground)"
-              >
-                ↺ Undo AI
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={improve}
-              disabled={aiBusy || !value.trim()}
-              className="text-[0.7rem] font-semibold text-(--accent) hover:underline disabled:opacity-50"
-            >
-              {aiBusy ? "Improving…" : "✦ Improve with AI"}
-            </button>
-          </div>
-        )}
-      </div>
+      <label className="label">{label}</label>
       <textarea
         className="input mt-1.5 resize-y leading-relaxed"
         rows={rows}
         value={value}
-        disabled={aiBusy}
         onChange={(e) => onChange(e.target.value)}
       />
-      {aiError && (
-        <p className="mt-1 text-xs text-red-600 dark:text-red-300">{aiError}</p>
-      )}
     </div>
   );
 }

@@ -9,7 +9,6 @@ A personal portfolio built with **Next.js 16**, **Tailwind CSS 4**, and **Fireba
 - Saving in the admin panel writes the whole content document; the public site updates instantly via the live subscription.
 - The contact form writes to a `messages` collection (create-only for visitors). Enquiries appear in the admin panel's **Messages** tab, where you can reply by email, mark read, or delete.
 - The profile photo is editable from the admin Hero tab — paste an image URL or upload a file (it's resized in the browser and stored inline with the content, no Firebase Storage needed).
-- The ✨ chat widget is an AI assistant (DeepSeek via OpenRouter) that answers visitor questions using the live portfolio content. The API key lives server-side only: set `OPENROUTER_API_KEY` in `.env.local` locally and as an environment variable on Vercel. Without the key, the widget shows a friendly "not configured" error; the rest of the site works normally.
 
 ## One-time Firebase setup (required before editing works)
 
