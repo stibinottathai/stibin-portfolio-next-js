@@ -128,8 +128,24 @@ export default function MarketingCTA() {
                   {MARKETING_CTA.description}
                 </p>
 
+                {/* Author Snippet */}
+                <div className="mt-8 flex items-center gap-3.5 rounded-2xl border border-(--border) bg-(--surface-2)/60 p-3 max-w-sm">
+                  <div className="size-11 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/avatar.svg"
+                      alt="Stibin Augustine"
+                      className="size-full rounded-full object-cover bg-(--surface)"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-(--foreground)">Stibin Augustine</p>
+                    <p className="font-mono text-[10px] text-(--accent)">Digital Marketer &amp; Developer</p>
+                  </div>
+                </div>
+
                 {/* Direct info list */}
-                <div className="mt-8 space-y-3 text-sm text-(--muted)">
+                <div className="mt-5 space-y-2.5 text-sm text-(--muted)">
                   <a
                     href="mailto:stibinaugustine3047@gmail.com"
                     className="flex items-center gap-3 transition-colors hover:text-(--accent)"

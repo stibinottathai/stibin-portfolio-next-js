@@ -1,5 +1,11 @@
 export interface MarketingHeroData {
   eyebrow: string;
+  author: {
+    name: string;
+    role: string;
+    photoUrl: string;
+    status: string;
+  };
   heading: string;
   highlightWords: string[];
   supportingText: string;
@@ -75,6 +81,12 @@ export interface StaticIndicator {
 
 export const HERO_DATA: MarketingHeroData = {
   eyebrow: "DIGITAL MARKETING",
+  author: {
+    name: "Stibin Augustine",
+    role: "Digital Marketer & Full-Stack Engineer",
+    photoUrl: "/avatar.svg",
+    status: "Available for Consultations & Growth",
+  },
   heading: "Digital Marketing That Gets Found, Understood & Chosen.",
   highlightWords: ["Found,", "Understood", "& Chosen."],
   supportingText:

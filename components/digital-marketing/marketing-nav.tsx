@@ -37,6 +37,19 @@ function ThemeToggle() {
 
 export default function MarketingNav() {
   const [open, setOpen] = useState(false);
+  const [photo, setPhoto] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("portfolio_content_v1");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed?.hero?.photoUrl) setPhoto(parsed.hero.photoUrl);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const navLinks = [
     { href: "#expertise", label: "Expertise" },
@@ -53,15 +66,26 @@ export default function MarketingNav() {
         {/* Brand / Home Link */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 font-mono text-sm font-bold text-slate-950 shadow-sm transition-transform group-hover:scale-105">
-              SA
-            </span>
+            {photo ? (
+              <span className="rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo}
+                  alt="Stibin Augustine"
+                  className="block size-9 rounded-full object-cover bg-(--surface)"
+                />
+              </span>
+            ) : (
+              <span className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 font-mono text-sm font-bold text-slate-950 shadow-sm transition-transform group-hover:scale-105">
+                SA
+              </span>
+            )}
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-wide text-(--foreground)">
                 Stibin Augustine
               </span>
               <span className="font-mono text-[10px] tracking-wider text-(--accent) uppercase">
-                Digital Marketing & SEO
+                Digital Marketing &amp; SEO
               </span>
             </div>
           </Link>
