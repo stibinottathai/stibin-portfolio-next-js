@@ -152,6 +152,13 @@ function Nav({
               {l.label}
             </a>
           ))}
+          <Link
+            href="/digital-marketing"
+            className="inline-flex items-center gap-1.5 rounded-full border border-(--border) bg-(--chip-bg) px-3 py-1 text-xs font-medium text-(--muted) transition-colors hover:border-cyan-400/40 hover:text-(--foreground)"
+          >
+            <span className="size-1.5 rounded-full bg-cyan-400" />
+            Digital Marketing
+          </Link>
           <ThemeToggle />
           <a
             href="#contact"
@@ -162,6 +169,12 @@ function Nav({
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            href="/digital-marketing"
+            className="rounded-full border border-(--border) px-2.5 py-1 text-[11px] text-(--muted)"
+          >
+            Marketing
+          </Link>
           <ThemeToggle />
           <button
             className="flex size-10 items-center justify-center rounded-lg border border-(--border)"
@@ -185,6 +198,15 @@ function Nav({
               {l.label}
             </a>
           ))}
+          <div className="pt-2 mt-2 border-t border-(--border)">
+            <Link
+              href="/digital-marketing"
+              onClick={() => setOpen(false)}
+              className="block py-1 text-sm font-medium text-(--accent)"
+            >
+              ✦ Digital Marketing &amp; SEO Services →
+            </Link>
+          </div>
         </div>
       )}
     </header>
@@ -783,12 +805,21 @@ function ContactSection({
 
       <footer className="border-t border-(--border) py-8 text-center text-xs text-(--muted)">
         <p>{t.footer(hero.name, new Date().getFullYear())}</p>
-        <Link
-          href="/admin"
-          className="mt-2 inline-block opacity-40 transition-opacity hover:opacity-100"
-        >
-          Admin
-        </Link>
+        <div className="mt-2 flex items-center justify-center gap-4">
+          <Link
+            href="/digital-marketing"
+            className="text-xs text-(--accent) transition-opacity hover:opacity-80"
+          >
+            Digital Marketing &amp; SEO Services
+          </Link>
+          <span className="opacity-30">·</span>
+          <Link
+            href="/admin"
+            className="opacity-40 transition-opacity hover:opacity-100"
+          >
+            Admin
+          </Link>
+        </div>
       </footer>
     </section>
   );
