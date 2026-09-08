@@ -54,7 +54,7 @@ export const STRINGS = {
         "Something went wrong sending your message — please try again, or email me directly instead.",
     },
     footer: (name: string, year: number) =>
-      `© ${year} ${name} · Built with Next.js, Tailwind CSS & Firebase`,
+      `© ${year} ${name}`,
   },
 };
 
