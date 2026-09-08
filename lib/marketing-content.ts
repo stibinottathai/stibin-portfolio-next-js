@@ -68,6 +68,7 @@ export interface CaseStudy {
   title: string;
   domain: string;
   type: string;
+  liveUrl?: string;
   statusBadge?: string;
   keywordHighlight?: string;
   highlight: string;
@@ -141,9 +142,10 @@ export const HERO_DATA: MarketingHeroData = {
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    id: "btbanana",
-    title: "Btbanana.com",
-    domain: "btbanana.com",
+    id: "brandovastudio",
+    title: "Brandovastudio.com",
+    domain: "brandovastudio.com",
+    liveUrl: "https://www.brandovastudio.com/",
     type: "Cross-Border E-Commerce & Tech Hardware",
     keywordHighlight: 'Ranked #1 for "buy laptops from dubai to india"',
     highlight: "Ranked #1 on Google & Generated High-Volume Inbound Leads",
@@ -166,28 +168,29 @@ export const CASE_STUDIES: CaseStudy[] = [
     accentColor: "from-cyan-400 to-blue-500",
   },
   {
-    id: "brandovastudio",
-    title: "Brandovastudio.com",
-    domain: "brandovastudio.com",
-    type: "Creative & Digital Branding Agency",
-    keywordHighlight: "SEO-Friendly Studio & Discovery Platform",
-    highlight: "Search-Optimized Digital Presence Built for Client Acquisition",
+    id: "btbanana",
+    title: "Btbanana.com",
+    domain: "btbanana.com",
+    liveUrl: "https://www.btbanana.com/",
+    type: "B2B Wholesale & Distribution Platform",
+    keywordHighlight: "B2B Wholesale Catalog & Bulk Order Lead Engine",
+    highlight: "B2B Wholesale Digital Ordering & Catalog Platform",
     description:
-      "Designed and developed an SEO-friendly agency web platform built to showcase portfolio assets, establish brand authority, and convert prospective enterprise clients seeking creative and branding solutions.",
+      "Developed a streamlined B2B wholesale platform engineered for bulk buyers, wholesale catalog distribution, high-volume inquiry management, and business lead capture.",
     impactMetrics: [
-      "Clean semantic site hierarchy",
-      "High Core Web Vitals speed scores",
-      "Optimized client inquiry conversion paths",
-      "Entity & brand authority signals",
+      "B2B wholesale catalog architecture",
+      "High-volume inquiry & order request funnels",
+      "Fast mobile & desktop performance",
+      "Direct wholesale buyer contact paths",
     ],
     tags: [
-      "Agency SEO",
-      "Brand Positioning",
-      "Technical SEO",
-      "Conversion UX",
-      "Creative Portfolio",
+      "B2B Wholesale",
+      "Wholesale Distribution",
+      "Bulk Orders",
+      "Lead Capture",
+      "Digital Platform",
     ],
-    icon: "🎨",
+    icon: "📦",
     accentColor: "from-indigo-400 to-purple-500",
   },
   {

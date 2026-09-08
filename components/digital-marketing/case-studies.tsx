@@ -45,6 +45,17 @@ export default function CaseStudies() {
                     <span className="rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 font-mono text-[10px] font-semibold text-amber-600 dark:text-amber-300">
                       {study.statusBadge}
                     </span>
+                  ) : study.liveUrl ? (
+                    <a
+                      href={study.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-2.5 py-1 font-mono text-[10px] font-semibold text-cyan-600 dark:text-cyan-300 transition-all hover:bg-cyan-400/20 hover:border-cyan-400 hover:scale-105 active:scale-95 cursor-pointer"
+                      title={`Visit live website: ${study.title}`}
+                    >
+                      <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                      Live Website ↗
+                    </a>
                   ) : (
                     <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2.5 py-1 font-mono text-[10px] font-semibold text-cyan-600 dark:text-cyan-300">
                       Live Platform
@@ -54,9 +65,23 @@ export default function CaseStudies() {
 
                 {/* Domain & Type */}
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-(--foreground) group-hover:text-cyan-400 dark:group-hover:text-cyan-300 transition-colors">
-                    {study.title}
-                  </h3>
+                  {study.liveUrl ? (
+                    <a
+                      href={study.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/title inline-flex items-center gap-1.5 text-xl sm:text-2xl font-bold tracking-tight text-(--foreground) hover:text-cyan-400 dark:hover:text-cyan-300 transition-colors"
+                    >
+                      <span>{study.title}</span>
+                      <span className="text-sm text-(--accent) transition-transform group-hover/title:translate-x-0.5 group-hover/title:-translate-y-0.5">
+                        ↗
+                      </span>
+                    </a>
+                  ) : (
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-(--foreground) group-hover:text-cyan-400 dark:group-hover:text-cyan-300 transition-colors">
+                      {study.title}
+                    </h3>
+                  )}
                   <p className="font-mono text-xs text-(--accent) mt-0.5">
                     {study.type}
                   </p>
