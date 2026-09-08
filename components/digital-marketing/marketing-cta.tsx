@@ -131,12 +131,15 @@ export default function MarketingCTA() {
 
                 {/* Author Snippet */}
                 <div className="mt-5 flex items-center gap-3 rounded-xl border border-(--border) bg-(--surface-2)/60 p-2.5 max-w-sm">
-                  <div className="size-9 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+                  <div className="size-10 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/avatar.svg"
                       alt="Stibin Augustine"
                       className="size-full rounded-full object-cover bg-(--surface)"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
+                      }}
                     />
                   </div>
                   <div>

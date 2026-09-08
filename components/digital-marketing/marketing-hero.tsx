@@ -32,29 +32,37 @@ export default function MarketingHero() {
 
       <div className="mx-auto w-full max-w-5xl px-5">
         <div className="flex flex-col items-center text-center">
-          {/* Unified Compact Author & Domain Badge */}
+          {/* Unified Prominent Author & Domain Badge */}
           <Reveal>
-            <div className="mb-4 sm:mb-5 inline-flex max-w-full items-center gap-2.5 sm:gap-3 rounded-full border border-(--border) bg-(--surface-2)/85 p-1 pe-3.5 sm:pe-4 backdrop-blur-md shadow-md shadow-cyan-500/5 transition-all hover:border-cyan-400/40">
-              {/* Photo with gradient ring */}
-              <div className="relative size-8 sm:size-9 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
+            <div className="mb-4 sm:mb-6 inline-flex max-w-full items-center gap-3 sm:gap-4 rounded-2xl sm:rounded-full border border-(--border) bg-(--surface-2)/90 p-1.5 sm:p-2 pe-4 sm:pe-5 backdrop-blur-xl shadow-lg shadow-cyan-500/10 transition-all hover:border-cyan-400/50 hover:shadow-cyan-500/20">
+              {/* Photo with vibrant gradient ring */}
+              <div className="relative size-12 sm:size-14 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-500 to-fuchsia-500 p-[2.5px] shadow-md shadow-cyan-500/20">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={photo}
+                  src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
                   alt={HERO_DATA.author.name}
                   className="size-full rounded-full object-cover bg-(--surface)"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
+                  }}
                 />
-                <span className="absolute -bottom-0.5 -end-0.5 flex size-2.5 items-center justify-center rounded-full bg-(--surface)">
-                  <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="absolute -bottom-0.5 -end-0.5 flex size-3.5 sm:size-4 items-center justify-center rounded-full bg-(--surface) ring-2 ring-(--surface)">
+                  <span className="size-2 sm:size-2.5 rounded-full bg-emerald-400 animate-pulse" />
                 </span>
               </div>
               {/* Text info */}
-              <div className="flex items-center gap-2 text-left min-w-0">
-                <span className="truncate text-xs sm:text-sm font-bold text-(--foreground) tracking-tight">
-                  {HERO_DATA.author.name}
-                </span>
-                <span className="hidden xs:inline-block size-1 rounded-full bg-(--muted)/60" />
+              <div className="flex flex-col text-left min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="truncate text-xs sm:text-sm font-bold text-(--foreground) tracking-tight">
+                    {HERO_DATA.author.name}
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] sm:text-[10px] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shrink-0">
+                    <span className="size-1 rounded-full bg-emerald-400" />
+                    Available
+                  </span>
+                </div>
                 <span className="truncate font-mono text-[10px] sm:text-[11px] font-medium text-(--accent)">
-                  SEO, Ads &amp; AI Growth
+                  SEO, Paid Ads &amp; AI Growth
                 </span>
               </div>
             </div>
