@@ -7,6 +7,7 @@ import Reveal from "@/components/reveal";
 
 export default function MarketingHero() {
   const [photo, setPhoto] = useState(HERO_DATA.author.photoUrl);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const cached = loadCachedContent();
@@ -14,6 +15,21 @@ export default function MarketingHero() {
       setPhoto(cached.hero.photoUrl);
     }
   }, []);
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+    if (isModalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [isModalOpen]);
 
   return (
     <section className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-center overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16">
@@ -32,11 +48,17 @@ export default function MarketingHero() {
 
       <div className="mx-auto w-full max-w-5xl px-5">
         <div className="flex flex-col items-center text-center">
-          {/* Unified Prominent Author & Domain Badge */}
+          {/* Unified Prominent Author & Domain Badge (Clickable with Pop-up) */}
           <Reveal>
-            <div className="mb-4 sm:mb-6 inline-flex max-w-full items-center gap-3 sm:gap-4 rounded-2xl sm:rounded-full border border-(--border) bg-(--surface-2)/90 p-1.5 sm:p-2 pe-4 sm:pe-5 backdrop-blur-xl shadow-lg shadow-cyan-500/10 transition-all hover:border-cyan-400/50 hover:shadow-cyan-500/20">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={isModalOpen}
+              title="Click to view full photo"
+              className="group mb-4 sm:mb-6 inline-flex max-w-full items-center gap-3 sm:gap-4 rounded-2xl sm:rounded-full border border-(--border) bg-(--surface-2)/90 p-1.5 sm:p-2 pe-4 sm:pe-5 backdrop-blur-xl transition-all hover:border-cyan-400/60 hover:scale-[1.02] active:scale-95 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            >
               {/* Photo with vibrant gradient ring */}
-              <div className="relative size-12 sm:size-14 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-500 to-fuchsia-500 p-[2.5px] shadow-md shadow-cyan-500/20">
+              <div className="relative size-12 sm:size-14 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 via-indigo-500 to-fuchsia-500 p-[2.5px] transition-transform group-hover:scale-105">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
@@ -53,7 +75,7 @@ export default function MarketingHero() {
               {/* Text info */}
               <div className="flex flex-col text-left min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="truncate text-xs sm:text-sm font-bold text-(--foreground) tracking-tight">
+                  <span className="truncate text-xs sm:text-sm font-bold text-(--foreground) tracking-tight group-hover:text-cyan-400 transition-colors">
                     {HERO_DATA.author.name}
                   </span>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] sm:text-[10px] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shrink-0">
@@ -61,11 +83,16 @@ export default function MarketingHero() {
                     Available
                   </span>
                 </div>
-                <span className="truncate font-mono text-[10px] sm:text-[11px] font-medium text-(--accent)">
-                  SEO, Paid Ads &amp; AI Growth
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="truncate font-mono text-[10px] sm:text-[11px] font-medium text-(--accent)">
+                    SEO, Paid Ads &amp; AI Growth
+                  </span>
+                  <span className="hidden sm:inline text-[10px] text-(--muted) opacity-0 group-hover:opacity-100 transition-opacity">
+                    · 🔍 View
+                  </span>
+                </div>
               </div>
-            </div>
+            </button>
           </Reveal>
 
           {/* Main Heading */}
@@ -132,6 +159,94 @@ export default function MarketingHero() {
           </Reveal>
         </div>
       </div>
+
+      {/* Enlarged Profile Photo Modal / Pop-up (Mobile Friendly) */}
+      {isModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Enlarged profile photo of Stibin Augustine"
+          onClick={() => setIsModalOpen(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[340px] xs:max-w-sm sm:max-w-md overflow-hidden rounded-3xl border border-(--border) bg-(--surface-2)/95 p-5 sm:p-7 shadow-2xl backdrop-blur-2xl animate-in zoom-in-95 duration-200 text-center"
+          >
+            {/* Top Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close dialog"
+              className="absolute top-4 right-4 flex size-8 items-center justify-center rounded-full border border-(--border) bg-(--card-bg) text-(--muted) hover:text-(--foreground) hover:border-cyan-400/60 transition-colors cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {/* Ambient Background Gradient inside card */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-cyan-500/10 via-transparent to-fuchsia-500/10 pointer-events-none" />
+
+            {/* Enlarged Photo Frame */}
+            <div className="mx-auto mt-2 relative size-44 xs:size-52 sm:size-60 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-fuchsia-500 p-[3px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
+                alt={HERO_DATA.author.name}
+                className="size-full rounded-[13px] xs:rounded-[21px] sm:rounded-[29px] object-cover bg-(--surface)"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
+                }}
+              />
+              <span className="absolute bottom-2 right-2 flex size-4 sm:size-5 items-center justify-center rounded-full bg-(--surface) ring-2 ring-(--surface)">
+                <span className="size-2.5 sm:size-3 rounded-full bg-emerald-400 animate-pulse" />
+              </span>
+            </div>
+
+            {/* Author Details */}
+            <div className="mt-4 sm:mt-5">
+              <div className="flex items-center justify-center gap-2">
+                <h3 className="text-lg sm:text-xl font-bold text-(--foreground) tracking-tight">
+                  {HERO_DATA.author.name}
+                </h3>
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Available
+                </span>
+              </div>
+              <p className="mt-1 font-mono text-[11px] sm:text-xs font-medium text-(--accent)">
+                Digital Marketing, SEO &amp; Paid Ads Expert
+              </p>
+              <p className="mt-2 text-xs text-(--muted) max-w-xs mx-auto leading-relaxed">
+                4+ years experience · Based in Dubai, UAE · Specialized in organic search (#1 Google rank), Google Ads, Meta Ads &amp; full-stack web engineering.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+                <a
+                  href="https://wa.me/971565564136?text=Hi%20Stibin,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20for%20a%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-2 text-xs font-semibold text-white shadow-md shadow-emerald-500/25 transition-transform hover:scale-105 active:scale-95"
+                >
+                  <span>💬</span> WhatsApp Stibin
+                </a>
+                <a
+                  href="#contact"
+                  onClick={() => setIsModalOpen(false)}
+                  className="rounded-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 px-4 py-2 text-xs font-semibold text-slate-950 transition-transform hover:scale-105"
+                >
+                  Send Inquiry →
+                </a>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="rounded-full border border-(--border) bg-(--chip-bg) px-3.5 py-2 text-xs font-medium text-(--foreground) hover:bg-(--surface) transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
