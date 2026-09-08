@@ -156,21 +156,21 @@ export default function MarketingHero() {
 
           {/* Dual CTAs */}
           <Reveal delay={180}>
-            <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-5 sm:mt-6 flex items-center justify-center gap-2.5 sm:gap-4 w-full max-w-lg mx-auto">
               <a
                 href={HERO_DATA.primaryCta.href}
-                className="group rounded-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 px-7 py-3 text-xs sm:text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.03] hover:shadow-cyan-500/30 cursor-pointer"
+                className="group flex-1 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 px-3 py-2.5 sm:px-7 sm:py-3 text-[11px] xs:text-xs sm:text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.03] hover:shadow-cyan-500/30 cursor-pointer whitespace-nowrap"
               >
-                {HERO_DATA.primaryCta.label}
-                <span className="ms-1.5 inline-block transition-transform group-hover:translate-y-0.5">
+                <span>{HERO_DATA.primaryCta.label}</span>
+                <span className="ms-1 inline-block transition-transform group-hover:translate-y-0.5">
                   ↓
                 </span>
               </a>
               <a
                 href={HERO_DATA.secondaryCta.href}
-                className="rounded-full border border-(--border) bg-(--chip-bg) px-7 py-3 text-xs sm:text-sm font-semibold text-(--foreground) backdrop-blur transition-all hover:border-cyan-400/50 hover:bg-(--surface-2) cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center rounded-full border border-(--border) bg-(--chip-bg) px-3 py-2.5 sm:px-7 sm:py-3 text-[11px] xs:text-xs sm:text-sm font-semibold text-(--foreground) backdrop-blur transition-all hover:border-cyan-400/50 hover:bg-(--surface-2) cursor-pointer whitespace-nowrap"
               >
-                {HERO_DATA.secondaryCta.label}
+                <span>{HERO_DATA.secondaryCta.label}</span>
               </a>
             </div>
           </Reveal>
