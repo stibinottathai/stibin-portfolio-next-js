@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import DigitalMarketingView from "@/components/digital-marketing/digital-marketing-view";
 import { MARKETING_FAQS } from "@/lib/marketing-content";
 
-const siteUrl = "https://stibinaugustine.com";
+const siteUrl = "https://stibin.website";
 const pageUrl = `${siteUrl}/digital-marketing`;
 
 export const metadata: Metadata = {
-  title: "Digital Marketing, SEO, AEO, GEO & Google Ads Specialist in Dubai",
+  title: "Digital Marketing Freelancer in Dubai | SEO, AEO, GEO & Paid Ads | Stibin Augustine",
   description:
-    "ROI-driven Digital Marketing, Technical SEO (#1 Google Rankings), Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Google & Meta Ads in Dubai, UAE by Stibin Augustine. Full-stack development meets AI growth.",
+    "Strategic Digital Marketing, Technical SEO (#1 Google Rankings), Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Google & Meta Ads in Dubai, UAE by Stibin Augustine. Full-stack development meets AI growth.",
   keywords: [
     // Digital Marketing & Ads Dubai / UAE
     "digital marketing freelancer Dubai",

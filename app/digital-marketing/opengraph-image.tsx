@@ -75,7 +75,7 @@ export default async function Image() {
               fontFamily: "monospace",
             }}
           >
-            stibinaugustine.com/digital-marketing
+            stibin.website/digital-marketing
           </span>
         </div>
 

@@ -14,16 +14,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://stibinaugustine.com";
+const siteUrl = "https://stibin.website";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Stibin Augustine | Full-Stack Developer & Digital Marketer in Dubai",
+    default: "Stibin Augustine | Full-Stack Developer & Digital Marketing Specialist in Dubai",
     template: "%s | Stibin Augustine",
   },
   description:
-    "Stibin Augustine is a Full-Stack Developer & Digital Marketing Specialist based in Dubai, UAE. 4+ years engineering scalable web applications (Next.js, React), mobile apps (Flutter), AI integrations, and high-ROI digital marketing (SEO, AEO, GEO, Google Ads, Meta Ads). Available for Dubai and remote projects.",
+    "Stibin Augustine is a Full-Stack Developer & Digital Marketing Specialist based in Dubai, UAE. 4+ years building high-performance web & mobile applications (Next.js, Flutter) and driving ROI with SEO (#1 rankings), AEO, GEO, and Google/Meta Ads.",
   keywords: [
     // Personal Brand
     "Stibin Augustine",
@@ -155,7 +155,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Stibin Augustine | Full-Stack Developer & Digital Marketer in Dubai",
+    title: "Stibin Augustine | Full-Stack Developer & Digital Marketing Specialist in Dubai",
     description:
       "Full-Stack Web & Mobile Developer and Digital Marketing Specialist based in Dubai, UAE. 4+ years shipping scalable apps (Next.js, Flutter), AI integrations, and ROI-driven SEO, AEO, and Google/Meta Ads.",
     url: siteUrl,
@@ -165,7 +165,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stibin Augustine | Full-Stack Developer & Digital Marketer in Dubai",
+    title: "Stibin Augustine | Full-Stack Developer & Digital Marketing Specialist in Dubai",
     description:
       "Full-Stack Developer (Next.js, Flutter) & Digital Marketing Specialist in Dubai, UAE. Available for freelance & full-time roles.",
     creator: "@stibinaugustine",
@@ -276,7 +276,7 @@ const rootStructuredData = {
       "@type": "ProfilePage",
       "@id": `${siteUrl}/#profilepage`,
       url: siteUrl,
-      name: "Stibin Augustine | Full-Stack Developer & Digital Marketer in Dubai",
+      name: "Stibin Augustine | Full-Stack Developer & Digital Marketing Specialist in Dubai",
       mainEntity: {
         "@id": `${siteUrl}/#person`,
       },
