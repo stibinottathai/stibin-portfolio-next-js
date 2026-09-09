@@ -81,12 +81,26 @@ export interface FAQItem {
   category: "General" | "Development" | "Marketing" | "AI & GEO";
 }
 
+export interface Certification {
+  title: string;
+  issuer: string;
+  issueDate: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  badge?: string;
+  badgeUrl?: string;
+  certificateUrl?: string;
+  skills: string[];
+  description?: string;
+}
+
 export interface PortfolioContent {
   hero: Hero;
   about: About;
   skills: SkillGroup[];
   experience: Experience[];
   projects: Project[];
+  certifications: Certification[];
   education: Education[];
   socials: SocialLink[];
 }
@@ -460,6 +474,34 @@ export const DEFAULT_CONTENT: PortfolioContent = {
       featured: false,
     },
   ],
+  certifications: [
+    {
+      title: "AI Aware 2025 — AI For All",
+      issuer: "Intel & Digital India (CBSE)",
+      issueDate: "16/08/2026 · Verified Certificate",
+      credentialId: "INTEL-AI-AWARE-2025",
+      credentialUrl: "/certifications/intel-ai-aware-certificate.png",
+      badge: "Intel AI Certified",
+      badgeUrl: "/certifications/intel-ai-aware-badge.png",
+      certificateUrl: "/certifications/intel-ai-aware-certificate.png",
+      description:
+        "Official certification for completing the AI Aware stage of the national AI For All initiative by Intel, Digital India, and CBSE. Demonstrates foundational mastery of AI domains, computer vision, natural language processing, and responsible AI ethics.",
+      skills: ["AI Fundamentals", "Computer Vision", "NLP", "AI Ethics", "Intel AI For All"],
+    },
+    {
+      title: "AI Appreciate 2025 — AI For All",
+      issuer: "Intel & Digital India (CBSE)",
+      issueDate: "16/08/2026 · Verified Certificate",
+      credentialId: "INTEL-AI-APPRECIATE-2025",
+      credentialUrl: "/certifications/intel-ai-appreciate-certificate.png",
+      badge: "Intel AI Certified",
+      badgeUrl: "/certifications/intel-ai-appreciate-badge.png",
+      certificateUrl: "/certifications/intel-ai-appreciate-certificate.png",
+      description:
+        "Official certification for completing the AI Appreciate stage of the national AI For All initiative by Intel, Digital India, and CBSE. Covers applied artificial intelligence, machine learning project lifecycle, algorithmic fairness, and practical problem-solving with AI.",
+      skills: ["Applied AI", "Machine Learning", "AI Project Lifecycle", "Algorithmic Fairness", "Intel AI For All"],
+    },
+  ],
   education: [
     {
       school: "Manipal University Jaipur",
@@ -487,7 +529,7 @@ export const DEFAULT_CONTENT: PortfolioContent = {
 /* ------------------------------------------------------------------ */
 
 const getPortfolioDoc = () => doc(db, "portfolio", "content");
-const CACHE_KEY = "portfolio-content-cache-v1";
+const CACHE_KEY = "portfolio-content-cache-v2";
 
 
 
@@ -533,6 +575,10 @@ export function mergeWithDefaults(
     skills: data.skills ?? DEFAULT_CONTENT.skills,
     experience: data.experience ?? DEFAULT_CONTENT.experience,
     projects: data.projects ?? DEFAULT_CONTENT.projects,
+    certifications:
+      data.certifications && data.certifications.length > 0
+        ? data.certifications
+        : DEFAULT_CONTENT.certifications,
     education: data.education ?? DEFAULT_CONTENT.education,
     socials: data.socials ?? DEFAULT_CONTENT.socials,
   };

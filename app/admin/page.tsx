@@ -21,6 +21,7 @@ import {
   SkillsEditor,
   ExperienceEditor,
   ProjectsEditor,
+  CertificationsEditor,
   EducationEditor,
   SocialsEditor,
 } from "@/components/admin/editors";
@@ -32,6 +33,7 @@ const SECTIONS = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "certifications", label: "Certifications" },
   { id: "education", label: "Education" },
   { id: "socials", label: "Social Links" },
   { id: "messages", label: "📥 Messages" },
@@ -303,6 +305,9 @@ function Editor({ user }: { user: User }) {
           )}
           {section === "projects" && (
             <ProjectsEditor content={content} patch={patch} />
+          )}
+          {section === "certifications" && (
+            <CertificationsEditor content={content} patch={patch} />
           )}
           {section === "education" && (
             <EducationEditor content={content} patch={patch} />

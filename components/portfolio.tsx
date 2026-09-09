@@ -10,6 +10,7 @@ import {
   HOMEPAGE_FAQS,
   type PortfolioContent,
   type Project,
+  type Certification,
   type ServiceItem,
   type FAQItem,
 } from "@/lib/content";
@@ -747,6 +748,196 @@ function ProjectsSection({
   );
 }
 
+function CertificationsSection({
+  content,
+  t,
+}: {
+  content: PortfolioContent;
+  t: UIStrings;
+}) {
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
+
+  const certifications =
+    content?.certifications && content.certifications.length > 0
+      ? content.certifications
+      : DEFAULT_CONTENT.certifications;
+
+  return (
+    <section
+      id="certifications"
+      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-10 sm:py-14"
+    >
+      <SectionHeading
+        kicker={t.sections.certificationsKicker}
+        title={t.sections.certificationsTitle}
+      />
+
+      <div className="grid gap-6 sm:grid-cols-2">
+        {certifications.map((cert, i) => (
+          <Reveal key={cert.title + i} delay={(i % 3) * 80}>
+            <div className="card card-hover group flex h-full flex-col justify-between p-6 relative overflow-hidden border border-(--border)/80 hover:border-cyan-400/50">
+              {/* Card ambient aura */}
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-500/[0.04] via-transparent to-indigo-500/[0.04] opacity-60 transition-opacity group-hover:opacity-100" />
+
+              <div>
+                {/* Header row: Badge / Issuer & Date */}
+                <div className="mb-4 flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/25 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-cyan-700 dark:text-cyan-300">
+                    <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    {cert.badge || "Verified Credential"}
+                  </span>
+                  <span className="font-mono text-[11px] text-(--muted)">
+                    {cert.issueDate}
+                  </span>
+                </div>
+
+                {/* Badge Image if present */}
+                {cert.badgeUrl && (
+                  <div
+                    onClick={() => cert.certificateUrl && setSelectedCert(cert)}
+                    className={`mb-4 flex items-center justify-center p-3 rounded-xl bg-(--surface-2)/60 border border-(--border)/60 group-hover:border-cyan-400/30 transition-colors ${
+                      cert.certificateUrl ? "cursor-pointer" : ""
+                    }`}
+                    title={cert.certificateUrl ? "Click to view full certificate" : undefined}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cert.badgeUrl}
+                      alt={`${cert.title} Badge — Stibin Augustine`}
+                      className="h-28 sm:h-32 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
+                    />
+                  </div>
+                )}
+
+                {/* Title */}
+                <h3 className="text-base font-bold tracking-tight text-(--foreground) transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-300">
+                  {cert.title}
+                </h3>
+
+                {/* Issuer */}
+                <p className="mt-1 font-mono text-xs font-semibold text-(--accent)">
+                  {cert.issuer}
+                </p>
+
+                {/* Description */}
+                {cert.description && (
+                  <p className="mt-2.5 text-xs leading-relaxed text-(--muted)">
+                    {cert.description}
+                  </p>
+                )}
+
+                {/* Skills Chips */}
+                {cert.skills && cert.skills.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {cert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="chip !px-2.5 !py-0.5 !text-[0.68rem] bg-(--chip-bg) border-(--border)/70"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Footer: Credential ID / Verification Link / Certificate Preview */}
+              <div className="mt-5 pt-4 border-t border-(--border)/60 flex items-center justify-between gap-2 text-xs">
+                {cert.credentialId ? (
+                  <span className="font-mono text-[10px] text-(--muted) tracking-wider">
+                    ID: {cert.credentialId}
+                  </span>
+                ) : (
+                  <span />
+                )}
+
+                {cert.certificateUrl ? (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCert(cert)}
+                    className="inline-flex items-center gap-1 font-mono text-[11px] font-semibold text-(--accent) hover:underline cursor-pointer"
+                  >
+                    <span>View Certificate</span>
+                    <span aria-hidden>↗</span>
+                  </button>
+                ) : cert.credentialUrl ? (
+                  <a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-[11px] font-semibold text-(--accent) hover:underline"
+                  >
+                    <span>Verify</span>
+                    <span aria-hidden>↗</span>
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Certificate Modal Lightbox */}
+      {selectedCert && selectedCert.certificateUrl && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setSelectedCert(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full card p-5 sm:p-6 bg-(--surface) border-cyan-400/40 shadow-2xl animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-(--border)">
+              <div>
+                <span className="font-mono text-[10px] font-bold text-(--accent) uppercase tracking-wider">
+                  Verified Certificate · {selectedCert.issuer}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-(--foreground)">
+                  {selectedCert.title}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedCert(null)}
+                className="flex size-8 items-center justify-center rounded-full bg-(--surface-2) border border-(--border) text-(--muted) hover:text-(--foreground) hover:border-cyan-400 cursor-pointer"
+                aria-label="Close certificate preview"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-xl border border-(--border)/80 bg-slate-950/30 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={selectedCert.certificateUrl}
+                alt={`${selectedCert.title} Official Certificate — Stibin Augustine`}
+                className="w-full h-auto object-contain max-h-[70vh] rounded-lg shadow-lg"
+              />
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <span className="font-mono text-(--muted)">
+                Recipient: <strong className="text-(--foreground)">Stibin Augustine</strong> · {selectedCert.issueDate}
+              </span>
+              <a
+                href={selectedCert.certificateUrl}
+                target="_blank"
+                rel="noreferrer"
+                download
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-400 px-4 py-1.5 font-semibold text-slate-950 transition-transform hover:scale-105"
+              >
+                <span>Open Full Image ↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function EducationSection({
   content,
   t,
@@ -1264,9 +1455,10 @@ export default function Portfolio() {
         <SkillsSection content={content} t={t} />
         <ExperienceSection content={content} t={t} />
         <ProjectsSection content={content} t={t} />
+        <CertificationsSection content={content} t={t} />
+        <EducationSection content={content} t={t} />
         <GEOEntitySummarySection />
         <AEOFAQSection t={t} />
-        <EducationSection content={content} t={t} />
         <ContactSection content={content} t={t} />
       </main>
     </div>

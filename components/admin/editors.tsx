@@ -5,6 +5,7 @@ import type {
   PortfolioContent,
   Experience,
   Project,
+  Certification,
   Education,
   SkillGroup,
   SocialLink,
@@ -464,6 +465,93 @@ export function ProjectsEditor({
             tech: [],
             link: "",
             featured: false,
+          })
+        }
+      />
+    </div>
+  );
+}
+
+export function CertificationsEditor({
+  content,
+  patch,
+}: {
+  content: PortfolioContent;
+  patch: Patch;
+}) {
+  const certifications = content.certifications || [];
+  const setCertifications = (certs: Certification[]) => patch({ certifications: certs });
+  const ops = useListOps(certifications, setCertifications);
+
+  return (
+    <div className="space-y-3">
+      {certifications.map((cert, i) => (
+        <EntryCard
+          key={i}
+          title={cert.title || "Untitled Certification"}
+          onUp={() => ops.move(i, -1)}
+          onDown={() => ops.move(i, 1)}
+          onRemove={() => ops.remove(i)}
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            <TextField
+              label="Certification Title"
+              value={cert.title}
+              onChange={(v) => ops.update(i, { ...cert, title: v })}
+            />
+            <TextField
+              label="Issuing Organization (e.g. Meta, Google, AWS)"
+              value={cert.issuer}
+              onChange={(v) => ops.update(i, { ...cert, issuer: v })}
+            />
+            <TextField
+              label="Issue Date / Validity"
+              value={cert.issueDate}
+              onChange={(v) => ops.update(i, { ...cert, issueDate: v })}
+            />
+            <TextField
+              label="Badge / Level (e.g. Professional Certificate)"
+              value={cert.badge ?? ""}
+              onChange={(v) => ops.update(i, { ...cert, badge: v })}
+            />
+            <TextField
+              label="Credential ID (optional)"
+              value={cert.credentialId ?? ""}
+              onChange={(v) => ops.update(i, { ...cert, credentialId: v })}
+            />
+            <TextField
+              label="Verification URL (optional)"
+              value={cert.credentialUrl ?? ""}
+              onChange={(v) => ops.update(i, { ...cert, credentialUrl: v })}
+              placeholder="https://…"
+            />
+          </div>
+          <TextArea
+            label="Description (optional)"
+            value={cert.description ?? ""}
+            onChange={(v) => ops.update(i, { ...cert, description: v })}
+            rows={2}
+          />
+          <StringList
+            label="Skills & Competencies Covered"
+            values={cert.skills || []}
+            onChange={(v) => ops.update(i, { ...cert, skills: v })}
+            addLabel="Add skill"
+          />
+        </EntryCard>
+      ))}
+      <AddButton
+        label="Add certification"
+        onClick={() =>
+          ops.add({
+            title: "",
+            issuer: "",
+            issueDate: "",
+            credentialId: "",
+            credentialUrl: "",
+            badge: "Verified Credential",
+            description: "",
+            skills: [],
           })
         }
       />

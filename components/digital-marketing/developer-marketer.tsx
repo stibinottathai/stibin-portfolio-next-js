@@ -1,10 +1,46 @@
 "use client";
 
+import { useState } from "react";
 import { DEVELOPER_ADVANTAGE } from "@/lib/marketing-content";
 import Reveal from "@/components/reveal";
 
 export default function DeveloperMarketer() {
   const { marketingPillar, techPillar } = DEVELOPER_ADVANTAGE;
+  const [selectedCert, setSelectedCert] = useState<{
+    title: string;
+    issuer: string;
+    date: string;
+    image: string;
+    badge: string;
+    stage: string;
+  } | null>(null);
+
+  const certifications = [
+    {
+      title: "AI Appreciate 2025 — AI For All",
+      stage: "Stage 2 · Applied AI & Project Lifecycle",
+      issuer: "Intel & Digital India (CBSE)",
+      date: "16/08/2026",
+      badgeImage: "/certifications/intel-ai-appreciate-badge.png",
+      certImage: "/certifications/intel-ai-appreciate-certificate.png",
+      badge: "Intel Certified",
+      description:
+        "Official national certification in Applied Artificial Intelligence concepts, machine learning project lifecycle, algorithmic fairness, and problem-solving with AI.",
+      skills: ["Applied AI", "Machine Learning", "AI Project Lifecycle", "Algorithmic Fairness", "Intel AI"],
+    },
+    {
+      title: "AI Aware 2025 — AI For All",
+      stage: "Stage 1 · AI Foundations & Domains",
+      issuer: "Intel & Digital India (CBSE)",
+      date: "16/08/2026",
+      badgeImage: "/certifications/intel-ai-aware-badge.png",
+      certImage: "/certifications/intel-ai-aware-certificate.png",
+      badge: "Intel Certified",
+      description:
+        "Official national certification demonstrating mastery of foundational AI domains, computer vision, natural language processing, and responsible AI ethics.",
+      skills: ["AI Fundamentals", "Computer Vision", "NLP", "Responsible AI", "Intel AI"],
+    },
+  ];
 
   return (
     <section id="advantage" className="relative scroll-mt-24 overflow-hidden py-10 sm:py-14">
@@ -122,7 +158,183 @@ export default function DeveloperMarketer() {
             </p>
           </div>
         </Reveal>
+
+        {/* Verified Intel Certifications Block at the bottom of the developer section */}
+        <Reveal delay={400} className="mt-8 sm:mt-10">
+          <div className="border-t border-(--border)/80 pt-8">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-mono text-[11px] font-semibold text-(--accent) uppercase tracking-wider">
+                    Verified Credentials &amp; Certifications
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-(--foreground)">
+                  Official Intel &amp; Digital India AI Certifications
+                </h3>
+              </div>
+              <span className="font-mono text-xs text-(--muted) rounded-full bg-(--chip-bg) px-3 py-1 border border-(--border)">
+                Issued to Stibin Augustine · 2026
+              </span>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              {certifications.map((cert) => (
+                <div
+                  key={cert.title}
+                  className="card card-hover group relative overflow-hidden p-6 border border-cyan-500/30 bg-gradient-to-br from-cyan-500/[0.04] via-transparent to-indigo-500/[0.04] flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Header: Badge Tag & Date */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/15 border border-cyan-400/30 px-3 py-1 font-mono text-[10px] font-bold text-cyan-700 dark:text-cyan-300">
+                        <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        {cert.badge}
+                      </span>
+                      <span className="font-mono text-xs text-(--muted)">
+                        {cert.date}
+                      </span>
+                    </div>
+
+                    {/* Badge Image Visual */}
+                    <div
+                      onClick={() =>
+                        setSelectedCert({
+                          title: cert.title,
+                          issuer: cert.issuer,
+                          date: cert.date,
+                          image: cert.certImage,
+                          badge: cert.badge,
+                          stage: cert.stage,
+                        })
+                      }
+                      className="mb-4 flex items-center justify-center p-4 rounded-2xl bg-(--surface-2)/80 border border-cyan-500/20 group-hover:border-cyan-400/40 transition-all cursor-pointer shadow-inner"
+                      title="Click to view full certificate"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={cert.badgeImage}
+                        alt={`${cert.title} Badge — Stibin Augustine`}
+                        className="h-32 sm:h-36 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
+                      />
+                    </div>
+
+                    {/* Title & Stage */}
+                    <h4 className="text-lg font-bold tracking-tight text-(--foreground) group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
+                      {cert.title}
+                    </h4>
+                    <p className="mt-0.5 font-mono text-xs font-semibold text-(--accent)">
+                      {cert.issuer}
+                    </p>
+                    <p className="mt-1 font-mono text-[11px] text-(--muted)">
+                      {cert.stage}
+                    </p>
+
+                    <p className="mt-3 text-xs leading-relaxed text-(--muted)">
+                      {cert.description}
+                    </p>
+
+                    {/* Skills Chips */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {cert.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="chip !px-2.5 !py-0.5 !text-[0.68rem] bg-(--chip-bg) border-(--border)/70"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action link */}
+                  <div className="mt-5 pt-4 border-t border-(--border)/60 flex items-center justify-between gap-3 text-xs">
+                    <span className="font-mono text-[10px] text-(--muted)">
+                      Verified Gov &amp; Intel Program
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setSelectedCert({
+                          title: cert.title,
+                          issuer: cert.issuer,
+                          date: cert.date,
+                          image: cert.certImage,
+                          badge: cert.badge,
+                          stage: cert.stage,
+                        })
+                      }
+                      className="inline-flex items-center gap-1 font-mono text-xs font-bold text-(--accent) hover:underline cursor-pointer"
+                    >
+                      <span>View Full Certificate</span>
+                      <span aria-hidden>↗</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </div>
+
+      {/* Certificate Lightbox Modal */}
+      {selectedCert && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setSelectedCert(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full card p-5 sm:p-6 bg-(--surface) border-cyan-400/40 shadow-2xl animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-(--border)">
+              <div>
+                <span className="font-mono text-[10px] font-bold text-(--accent) uppercase tracking-wider">
+                  Verified Certificate · {selectedCert.issuer}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-(--foreground)">
+                  {selectedCert.title}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedCert(null)}
+                className="flex size-8 items-center justify-center rounded-full bg-(--surface-2) border border-(--border) text-(--muted) hover:text-(--foreground) hover:border-cyan-400 cursor-pointer"
+                aria-label="Close certificate preview"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-xl border border-(--border)/80 bg-slate-950/30 flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={selectedCert.image}
+                alt={`${selectedCert.title} Official Certificate — Stibin Augustine`}
+                className="w-full h-auto object-contain max-h-[70vh] rounded-lg shadow-lg"
+              />
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <span className="font-mono text-(--muted)">
+                Recipient: <strong className="text-(--foreground)">Stibin Augustine</strong> · Completed {selectedCert.date}
+              </span>
+              <a
+                href={selectedCert.image}
+                target="_blank"
+                rel="noreferrer"
+                download
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-400 px-4 py-1.5 font-semibold text-slate-950 transition-transform hover:scale-105"
+              >
+                <span>Open Full Image ↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
