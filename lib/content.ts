@@ -1,6 +1,3 @@
-import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
-
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
@@ -525,10 +522,9 @@ export const DEFAULT_CONTENT: PortfolioContent = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Firestore access                                                    */
+/* Browser cache helpers                                               */
 /* ------------------------------------------------------------------ */
 
-const getPortfolioDoc = () => doc(db, "portfolio", "content");
 const CACHE_KEY = "portfolio-content-cache-v2";
 
 
@@ -549,7 +545,7 @@ export function loadCachedContent(): PortfolioContent | null {
   }
 }
 
-function cacheContent(data: Partial<PortfolioContent> | undefined): void {
+export function cacheContent(data: Partial<PortfolioContent> | undefined): void {
   try {
     if (data) {
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
@@ -582,39 +578,4 @@ export function mergeWithDefaults(
     education: data.education ?? DEFAULT_CONTENT.education,
     socials: data.socials ?? DEFAULT_CONTENT.socials,
   };
-}
-
-export async function loadContent(): Promise<PortfolioContent> {
-  try {
-    const snap = await getDoc(getPortfolioDoc());
-    return mergeWithDefaults(
-      snap.exists() ? (snap.data() as Partial<PortfolioContent>) : undefined,
-    );
-  } catch {
-    return DEFAULT_CONTENT;
-  }
-}
-
-/** Live subscription used by the public site so edits appear instantly. */
-export function subscribeContent(
-  onChange: (content: PortfolioContent) => void,
-): () => void {
-  return onSnapshot(
-    getPortfolioDoc(),
-    (snap) => {
-      const data = snap.exists()
-        ? (snap.data() as Partial<PortfolioContent>)
-        : undefined;
-      cacheContent(data);
-      onChange(mergeWithDefaults(data));
-    },
-    () => {
-      // Permission or network errors: fall back to cache, then defaults.
-      onChange(loadCachedContent() ?? DEFAULT_CONTENT);
-    },
-  );
-}
-
-export async function saveContent(content: PortfolioContent): Promise<void> {
-  await setDoc(getPortfolioDoc(), content);
 }

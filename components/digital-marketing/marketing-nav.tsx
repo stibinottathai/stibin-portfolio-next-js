@@ -52,9 +52,12 @@ function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light" | null>(null);
 
   useEffect(() => {
-    setTheme(
-      document.documentElement.dataset.theme === "light" ? "light" : "dark",
-    );
+    const frame = requestAnimationFrame(() => {
+      setTheme(
+        document.documentElement.dataset.theme === "light" ? "light" : "dark",
+      );
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const toggle = () => {
@@ -95,7 +98,7 @@ export default function MarketingNav() {
   useEffect(() => {
     const cached = loadCachedContent();
     if (cached?.hero?.photoUrl) {
-      setPhoto(cached.hero.photoUrl);
+      queueMicrotask(() => setPhoto(cached.hero.photoUrl));
     }
   }, []);
 
@@ -117,6 +120,9 @@ export default function MarketingNav() {
               <img
                 src={photo || "/avatar.svg"}
                 alt="Stibin Augustine — Digital Marketer & Full-Stack Developer in Dubai"
+                width={40}
+                height={40}
+                decoding="async"
                 className="size-full rounded-full object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

@@ -11,10 +11,9 @@ import {
 import { auth, googleProvider, isAdminEmail } from "@/lib/firebase";
 import {
   DEFAULT_CONTENT,
-  loadContent,
-  saveContent,
   type PortfolioContent,
 } from "@/lib/content";
+import { loadContent, saveContent } from "@/lib/content-store";
 import {
   HeroEditor,
   AboutEditor,

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MARKETING_CTA } from "@/lib/marketing-content";
-import { sendMessage } from "@/lib/messages";
 import Reveal from "@/components/reveal";
 import SiteFooter from "@/components/site-footer";
 
@@ -16,6 +15,7 @@ function QuickContactForm() {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
     setState("sending");
     try {
+      const { sendMessage } = await import("@/lib/messages");
       await sendMessage(form);
       setState("sent");
       setForm({ name: "", email: "", message: "" });
@@ -140,6 +140,10 @@ export default function MarketingCTA() {
                     <img
                       src="/avatar.svg"
                       alt="Stibin Augustine — Digital Marketer & Developer in Dubai, UAE"
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      decoding="async"
                       className="size-full rounded-full object-cover bg-(--surface)"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

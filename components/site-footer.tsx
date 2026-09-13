@@ -14,7 +14,7 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
   useEffect(() => {
     const cached = loadCachedContent();
     if (cached?.hero?.photoUrl) {
-      setPhoto(cached.hero.photoUrl);
+      queueMicrotask(() => setPhoto(cached.hero.photoUrl));
     }
   }, []);
 
@@ -38,6 +38,10 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
                 <img
                   src={photo || "/avatar.svg"}
                   alt="Stibin Augustine — Full-Stack Developer & Digital Marketing Specialist in Dubai"
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                  decoding="async"
                   className="size-10 rounded-full object-cover bg-(--surface)"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

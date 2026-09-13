@@ -66,6 +66,30 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* A compositor-only, zero-JavaScript reading progress indicator. */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 2.5px;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, #22d3ee, #6366f1, #d946ef);
+  animation: scale-progress linear both;
+  animation-timeline: scroll(root block);
+}
+
+@keyframes scale-progress {
+  to { transform: scaleX(1); }
+}
+
+/* Skip layout and paint work for sections far below the mobile viewport. */
+main > section:not(#top) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
 ::selection {
   background: rgba(34, 211, 238, 0.3);
 }
@@ -115,11 +139,10 @@ body {
    ========================================================================== */
 .reveal {
   opacity: 0;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   transition:
     opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.reveal-up {
@@ -146,21 +169,31 @@ body {
   transform: none;
 }
 
-.reveal.reveal-blur {
-  filter: blur(5px);
-}
-
 .reveal.revealed {
   opacity: 1;
   transform: translate(0, 0) scale(1);
-  filter: blur(0px);
+  will-change: auto;
+}
+
+/* Mobile content is immediately paintable; scroll effects must never delay LCP. */
+@media (max-width: 767px) {
+  main .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .aurora {
+    animation: none;
+    filter: blur(64px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
     transition: none !important;
   }
   html {

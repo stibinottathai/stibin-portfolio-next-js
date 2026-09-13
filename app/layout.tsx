@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import WhatsAppButton from "@/components/whatsapp-button";
-import ScrollProgress from "@/components/scroll-progress";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -314,7 +313,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <ScrollProgress />
+        <div className="scroll-progress" aria-hidden="true" />
         {children}
         <WhatsAppButton />
       </body>

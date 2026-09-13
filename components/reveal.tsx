@@ -18,6 +18,7 @@ interface RevealProps {
   className?: string;
   threshold?: number;
   blur?: boolean;
+  eager?: boolean;
 }
 
 export default function Reveal({
@@ -28,10 +29,12 @@ export default function Reveal({
   className = "",
   threshold = 0.08,
   blur = true,
+  eager = false,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (eager) return;
     const el = ref.current;
     if (!el) return;
 
@@ -56,7 +59,7 @@ export default function Reveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [eager, threshold]);
 
   const dirClass =
     direction === "left"
@@ -80,7 +83,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal ${dirClass} ${blurClass} ${className}`}
+      className={`reveal ${eager ? "revealed reveal-eager" : dirClass} ${eager ? "" : blurClass} ${className}`}
       style={Object.keys(customStyle).length > 0 ? customStyle : undefined}
     >
       {children}

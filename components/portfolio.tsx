@@ -2,20 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   loadCachedContent,
-  subscribeContent,
   DEFAULT_CONTENT,
   CORE_SERVICES,
   HOMEPAGE_FAQS,
   type PortfolioContent,
   type Project,
   type Certification,
-  type ServiceItem,
-  type FAQItem,
 } from "@/lib/content";
-import { initAnalytics } from "@/lib/firebase";
-import { sendMessage } from "@/lib/messages";
 import { STRINGS, type UIStrings } from "@/lib/i18n";
 import Reveal from "./reveal";
 import SiteFooter from "./site-footer";
@@ -25,7 +21,7 @@ import SiteFooter from "./site-footer";
 /* ------------------------------------------------------------------ */
 
 function TypedRoles({ roles }: { roles: string[] }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(roles[0] ?? "");
   const [roleIndex, setRoleIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
 
@@ -37,8 +33,10 @@ function TypedRoles({ roles }: { roles: string[] }) {
     if (!deleting && text === current) {
       timeout = setTimeout(() => setDeleting(true), 2200);
     } else if (deleting && text === "") {
-      setDeleting(false);
-      setRoleIndex((i) => (i + 1) % roles.length);
+      timeout = setTimeout(() => {
+        setDeleting(false);
+        setRoleIndex((i) => (i + 1) % roles.length);
+      }, 0);
     } else {
       timeout = setTimeout(
         () =>
@@ -113,9 +111,12 @@ function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light" | null>(null);
 
   useEffect(() => {
-    setTheme(
-      document.documentElement.dataset.theme === "light" ? "light" : "dark",
-    );
+    const frame = requestAnimationFrame(() => {
+      setTheme(
+        document.documentElement.dataset.theme === "light" ? "light" : "dark",
+      );
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const toggle = () => {
@@ -184,6 +185,9 @@ function Nav({
               <img
                 src={photoUrl || "/avatar.svg"}
                 alt={`Profile of ${name} — Full-Stack Developer & Digital Marketer in Dubai`}
+                width={40}
+                height={40}
+                decoding="async"
                 className="size-full rounded-full object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
@@ -327,7 +331,7 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
 
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 lg:grid-cols-[1fr_auto] lg:gap-14">
         <div>
-          <Reveal>
+          <Reveal eager>
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
@@ -337,26 +341,26 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
             </span>
           </Reveal>
 
-          <Reveal delay={80}>
+          <Reveal eager>
             <h1 className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]">
               <span>{t.hero.greeting} </span>
               <span className="text-gradient">{hero.name}</span>
             </h1>
           </Reveal>
 
-          <Reveal delay={160}>
+          <Reveal eager>
             <p className="mt-5 text-xl text-(--muted) sm:text-2xl">
               <TypedRoles roles={hero.roles} />
             </p>
           </Reveal>
 
-          <Reveal delay={240}>
+          <Reveal eager>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg">
               {hero.tagline}
             </p>
           </Reveal>
 
-          <Reveal delay={320}>
+          <Reveal eager>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
@@ -383,7 +387,7 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
             </div>
           </Reveal>
 
-          <Reveal delay={400}>
+          <Reveal eager>
             <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-(--muted)">
               <span className="inline-flex items-center gap-2">
                 <span aria-hidden>📍</span> {hero.location}
@@ -405,7 +409,7 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
         </div>
 
         {hero.photoUrl && (
-          <Reveal delay={200} className="hidden lg:block">
+          <Reveal eager className="hidden lg:block">
             <div className="group relative w-80">
               <div className="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-80" />
               <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 opacity-70" />
@@ -413,6 +417,10 @@ function Hero({ content, t }: { content: PortfolioContent; t: UIStrings }) {
               <img
                 src={hero.photoUrl}
                 alt={`${hero.name} — Full-Stack Developer and Digital Marketer in Dubai, UAE`}
+                width={320}
+                height={400}
+                loading="lazy"
+                decoding="async"
                 className="relative aspect-4/5 w-full rounded-[2rem] object-cover"
               />
               <span className="absolute -end-3 -bottom-4 rounded-xl border border-(--border) bg-(--surface-2)/95 px-4 py-2 font-mono text-xs text-(--accent) shadow-lg backdrop-blur">
@@ -800,12 +808,28 @@ function CertificationsSection({
                     }`}
                     title={cert.certificateUrl ? "Click to view full certificate" : undefined}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={cert.badgeUrl}
-                      alt={`${cert.title} Badge — Stibin Augustine`}
-                      className="h-28 sm:h-32 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
-                    />
+                    {cert.badgeUrl.startsWith("/") ? (
+                      <Image
+                        src={cert.badgeUrl}
+                        alt={`${cert.title} Badge — Stibin Augustine`}
+                        width={818}
+                        height={1024}
+                        sizes="(max-width: 640px) 90px, 102px"
+                        className="h-28 sm:h-32 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
+                      />
+                    ) : (
+                      // Admin-managed remote and data URLs cannot use the allow-listed optimizer.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={cert.badgeUrl}
+                        alt={`${cert.title} Badge — Stibin Augustine`}
+                        width={818}
+                        height={1024}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-28 sm:h-32 w-auto object-contain transition-transform group-hover:scale-105 duration-300 drop-shadow-md"
+                      />
+                    )}
                   </div>
                 )}
 
@@ -913,6 +937,9 @@ function CertificationsSection({
               <img
                 src={selectedCert.certificateUrl}
                 alt={`${selectedCert.title} Official Certificate — Stibin Augustine`}
+                width={1600}
+                height={1200}
+                decoding="async"
                 className="w-full h-auto object-contain max-h-[70vh] rounded-lg shadow-lg"
               />
             </div>
@@ -985,6 +1012,7 @@ function ContactForm({ t }: { t: UIStrings }) {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
     setState("sending");
     try {
+      const { sendMessage } = await import("@/lib/messages");
       await sendMessage(form);
       setState("sent");
       setForm({ name: "", email: "", message: "" });
@@ -1427,14 +1455,28 @@ export default function Portfolio() {
   const [content, setContent] = useState<PortfolioContent>(DEFAULT_CONTENT);
 
   useEffect(() => {
-    initAnalytics();
     const cached = loadCachedContent();
-    if (cached) setContent(cached);
+    if (cached) queueMicrotask(() => setContent(cached));
 
-    const unsubscribeContent = subscribeContent(setContent);
+    let unsubscribeContent: (() => void) | undefined;
+    let cancelled = false;
+
+    // Keep Firebase and Analytics out of the critical rendering path. The
+    // static HTML is complete; live CMS updates can safely connect afterward.
+    const timer = window.setTimeout(async () => {
+      const [{ subscribeContent }, { initAnalytics }] = await Promise.all([
+        import("@/lib/content-store"),
+        import("@/lib/firebase"),
+      ]);
+      if (cancelled) return;
+      unsubscribeContent = subscribeContent(setContent);
+      void initAnalytics();
+    }, 10000);
 
     return () => {
-      unsubscribeContent();
+      cancelled = true;
+      window.clearTimeout(timer);
+      unsubscribeContent?.();
     };
   }, []);
 

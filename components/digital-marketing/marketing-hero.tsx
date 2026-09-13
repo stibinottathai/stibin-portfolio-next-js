@@ -12,7 +12,7 @@ export default function MarketingHero() {
   useEffect(() => {
     const cached = loadCachedContent();
     if (cached?.hero?.photoUrl) {
-      setPhoto(cached.hero.photoUrl);
+      queueMicrotask(() => setPhoto(cached.hero.photoUrl));
     }
   }, []);
 
@@ -63,6 +63,9 @@ export default function MarketingHero() {
                 <img
                   src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
                   alt={`${HERO_DATA.author.name} — Full-Stack Developer & Digital Marketing Specialist in Dubai`}
+                  width={56}
+                  height={56}
+                  decoding="async"
                   className="size-full rounded-full object-cover bg-(--surface)"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
@@ -233,6 +236,9 @@ export default function MarketingHero() {
               <img
                 src={photo || HERO_DATA.author.photoUrl || "/avatar.svg"}
                 alt={`${HERO_DATA.author.name} — Full-Stack Developer & Digital Marketing Specialist in Dubai`}
+                width={240}
+                height={240}
+                decoding="async"
                 className="size-full rounded-[13px] xs:rounded-[21px] sm:rounded-[29px] object-cover bg-(--surface)"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/avatar.svg";

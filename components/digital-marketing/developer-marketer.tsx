@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { DEVELOPER_ADVANTAGE } from "@/lib/marketing-content";
 import Reveal from "@/components/reveal";
 
@@ -212,10 +213,12 @@ export default function DeveloperMarketer() {
                       className="mb-4 flex items-center justify-center p-4 rounded-2xl bg-(--surface-2)/80 border border-cyan-500/20 group-hover:border-cyan-400/40 transition-all cursor-pointer shadow-inner"
                       title="Click to view full certificate"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={cert.badgeImage}
                         alt={`${cert.title} Badge — Stibin Augustine`}
+                        width={818}
+                        height={1024}
+                        sizes="(max-width: 640px) 102px, 115px"
                         className="h-32 sm:h-36 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
                       />
                     </div>
@@ -314,6 +317,9 @@ export default function DeveloperMarketer() {
               <img
                 src={selectedCert.image}
                 alt={`${selectedCert.title} Official Certificate — Stibin Augustine`}
+                width={1600}
+                height={1200}
+                decoding="async"
                 className="w-full h-auto object-contain max-h-[70vh] rounded-lg shadow-lg"
               />
             </div>
