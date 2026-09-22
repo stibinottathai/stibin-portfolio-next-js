@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
+  // This is a search-led portfolio where most visits are a visitor's first
+  // page view. Inlining the small Tailwind bundle removes the only
+  // render-blocking request reported by mobile Lighthouse.
+  experimental: {
+    inlineCss: true,
+  },
   turbopack: {
     root: path.resolve(__dirname),
   },

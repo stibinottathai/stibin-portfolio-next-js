@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-
 export type RevealDirection =
   | "up"
   | "down"
@@ -23,44 +19,14 @@ interface RevealProps {
 
 export default function Reveal({
   children,
-  delay = 0,
-  duration,
   direction = "up",
   className = "",
-  threshold = 0.08,
   blur = true,
   eager = false,
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (eager) return;
-    const el = ref.current;
-    if (!el) return;
-
-    // If intersection observer is not supported, reveal immediately
-    if (typeof IntersectionObserver === "undefined") {
-      el.classList.add("revealed");
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("revealed");
-          observer.disconnect();
-        }
-      },
-      {
-        threshold,
-        rootMargin: "0px 0px -40px 0px",
-      },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [eager, threshold]);
-
+  // Keep the component paint-safe without waiting for hydration. Desktop
+  // reveal motion is progressive enhancement handled by CSS view timelines.
+  // Unsupported browsers and all mobile devices simply display the content.
   const dirClass =
     direction === "left"
       ? "reveal-left"
@@ -76,15 +42,9 @@ export default function Reveal({
 
   const blurClass = blur ? "reveal-blur" : "";
 
-  const customStyle: React.CSSProperties = {};
-  if (delay) customStyle.transitionDelay = `${delay}ms`;
-  if (duration) customStyle.transitionDuration = `${duration}ms`;
-
   return (
     <div
-      ref={ref}
-      className={`reveal ${eager ? "revealed reveal-eager" : dirClass} ${eager ? "" : blurClass} ${className}`}
-      style={Object.keys(customStyle).length > 0 ? customStyle : undefined}
+      className={`reveal ${eager ? "reveal-eager" : dirClass} ${eager ? "" : blurClass} ${className}`}
     >
       {children}
     </div>

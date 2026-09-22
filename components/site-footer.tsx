@@ -1,27 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { loadCachedContent } from "@/lib/content";
 
 interface FooterProps {
   variant?: "main" | "marketing";
 }
 
 export default function SiteFooter({ variant = "main" }: FooterProps) {
-  const [photo, setPhoto] = useState<string>("/avatar.svg");
-
-  useEffect(() => {
-    const cached = loadCachedContent();
-    if (cached?.hero?.photoUrl) {
-      queueMicrotask(() => setPhoto(cached.hero.photoUrl));
-    }
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="relative mt-12 border-t border-(--border) bg-(--surface)/40 backdrop-blur-md">
       {/* Top subtle gradient accent line */}
@@ -36,16 +19,13 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
               <span className="rounded-full bg-gradient-to-br from-cyan-400 via-indigo-400 to-fuchsia-400 p-[2px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={photo || "/avatar.svg"}
+                  src="/avatar.svg"
                   alt="Stibin Augustine — Full-Stack Developer & Digital Marketing Specialist in Dubai"
                   width={40}
                   height={40}
                   loading="lazy"
                   decoding="async"
                   className="size-10 rounded-full object-cover bg-(--surface)"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = "/avatar.svg";
-                  }}
                 />
               </span>
               <div>
@@ -213,12 +193,12 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
               Admin
             </Link>
             <span className="opacity-30">·</span>
-            <button
-              onClick={scrollToTop}
+            <a
+              href="#"
               className="inline-flex items-center gap-1 text-[11px] text-(--accent) hover:underline cursor-pointer"
             >
               Back to top ↑
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -134,56 +134,75 @@ main > section:not(#top) {
   white-space: nowrap;
 }
 
-/* ==========================================================================
-   Modern Hardware-Accelerated Scroll Reveal Animations
-   ========================================================================== */
+/* Paint-safe by default. Motion is a progressive enhancement below. */
 .reveal {
-  opacity: 0;
-  will-change: transform, opacity;
-  transition:
-    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.reveal-up {
-  transform: translateY(28px);
-}
-
-.reveal.reveal-down {
-  transform: translateY(-28px);
-}
-
-.reveal.reveal-left {
-  transform: translateX(-32px);
-}
-
-.reveal.reveal-right {
-  transform: translateX(32px);
-}
-
-.reveal.reveal-scale {
-  transform: scale(0.94);
-}
-
-.reveal.reveal-fade {
+  opacity: 1;
   transform: none;
 }
 
-.reveal.revealed {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-  will-change: auto;
+.reveal.reveal-up {
+  --reveal-x: 0px;
+  --reveal-y: 28px;
+  --reveal-scale: 1;
 }
 
-/* Mobile content is immediately paintable; scroll effects must never delay LCP. */
-@media (max-width: 767px) {
-  main .reveal {
+.reveal.reveal-down {
+  --reveal-x: 0px;
+  --reveal-y: -28px;
+  --reveal-scale: 1;
+}
+
+.reveal.reveal-left {
+  --reveal-x: -32px;
+  --reveal-y: 0px;
+  --reveal-scale: 1;
+}
+
+.reveal.reveal-right {
+  --reveal-x: 32px;
+  --reveal-y: 0px;
+  --reveal-scale: 1;
+}
+
+.reveal.reveal-scale {
+  --reveal-x: 0px;
+  --reveal-y: 0px;
+  --reveal-scale: 0.94;
+}
+
+.reveal.reveal-fade {
+  --reveal-x: 0px;
+  --reveal-y: 0px;
+  --reveal-scale: 1;
+}
+
+/* Native scroll-linked animation avoids observers, React state and hydration
+   delays. It is intentionally desktop-only; mobile content paints at once. */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal:not(.reveal-eager) {
+      animation-name: reveal-on-scroll;
+      animation-duration: 1ms;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view(block);
+      animation-range: entry 0% entry 28%;
+    }
+  }
+}
+
+@keyframes reveal-on-scroll {
+  from {
+    opacity: 0;
+    transform: translate(var(--reveal-x, 0px), var(--reveal-y, 20px)) scale(var(--reveal-scale, 1));
+  }
+  to {
     opacity: 1;
     transform: none;
-    transition: none;
-    will-change: auto;
   }
+}
 
+@media (max-width: 767px) {
   .aurora {
     animation: none;
     filter: blur(64px);
@@ -191,11 +210,6 @@ main > section:not(#top) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
   html {
     scroll-behavior: auto !important;
   }
