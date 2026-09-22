@@ -913,6 +913,12 @@ export interface MarketingFAQItem {
 
 export const MARKETING_FAQS: MarketingFAQItem[] = [
   {
+    question: "How can I find a digital marketing freelancer near me in Dubai?",
+    answer:
+      "Stibin Augustine is based in Bur Dubai and works with businesses across Dubai and the UAE. You can start with a remote discovery call and arrange an in-person meeting when the engagement requires it. Services include technical and on-page SEO, local SEO, AEO, GEO, Google Ads, Meta Ads, and conversion-focused landing pages.",
+    category: "Strategy",
+  },
+  {
     question: "What makes Stibin Augustine's digital marketing and SEO approach different?",
     answer:
       "As both a full-stack engineer and digital marketing specialist in Dubai, I solve technical bottlenecks directly in code (Core Web Vitals, server-side rendering, schema graphs, semantic markup) while crafting commercial-intent keyword strategies, AEO/GEO entity authority, and high-converting Google & Meta ad campaigns.",
@@ -949,4 +955,3 @@ export const MARKETING_FAQS: MarketingFAQItem[] = [
     category: "Strategy",
   },
 ];
-

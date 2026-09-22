@@ -123,6 +123,21 @@ export default function SiteFooter({ variant = "main" }: FooterProps) {
             </p>
             <ul className="space-y-2 text-xs text-(--muted)">
               <li>
+                <Link href="/services" className="hover:text-cyan-400 dark:hover:text-cyan-300 font-medium transition-colors inline-block py-0.5">
+                  Developer Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/web-developer-dubai" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
+                  Web Developer Dubai
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/app-developer-dubai" className="hover:text-(--foreground) transition-colors inline-block py-0.5">
+                  App Developer Dubai
+                </Link>
+              </li>
+              <li>
                 <Link href="/digital-marketing" className="hover:text-cyan-400 dark:hover:text-cyan-300 font-medium transition-colors inline-block py-0.5">
                   ✦ Overview
                 </Link>

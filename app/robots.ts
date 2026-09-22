@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/digital-marketing"],
+        allow: "/",
         disallow: ["/admin", "/admin/*"],
       },
     ],
@@ -15,4 +15,3 @@ export default function robots(): MetadataRoute.Robots {
     host: siteUrl,
   };
 }
-

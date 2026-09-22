@@ -6,9 +6,9 @@ const siteUrl = "https://stibin.website";
 const pageUrl = `${siteUrl}/digital-marketing`;
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Freelancer in Dubai | SEO, AEO, GEO & Paid Ads | Stibin Augustine",
+  title: { absolute: "Digital Marketing Freelancer Dubai | Stibin Augustine" },
   description:
-    "Strategic Digital Marketing, Technical SEO (#1 Google Rankings), Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and Google & Meta Ads in Dubai, UAE by Stibin Augustine. Full-stack development meets AI growth.",
+    "Dubai digital marketing freelancer for technical SEO, local SEO, AEO, GEO, Google Ads, Meta Ads and conversion-focused websites. Based in Bur Dubai.",
   keywords: [
     // Digital Marketing & Ads Dubai / UAE
     "digital marketing freelancer Dubai",
@@ -26,6 +26,10 @@ export const metadata: Metadata = {
     "online marketing freelancer Dubai",
     "performance marketing freelancer Dubai",
     "AI digital marketing freelancer Dubai",
+    "best freelance digital marketer",
+    "best digital marketer in UAE",
+    "digital marketer near me Dubai",
+    "digital marketing freelancer near me",
     "Google Ads expert Dubai",
     "Meta Ads specialist Dubai",
     "Facebook Ads UAE",
@@ -233,7 +237,7 @@ export default function DigitalMarketingPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
       <DigitalMarketingView />
     </>

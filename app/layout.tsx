@@ -18,11 +18,11 @@ const siteUrl = "https://stibin.website";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Stibin Augustine | Full-Stack Developer & Digital Marketing Specialist in Dubai",
+    default: "Freelance Developer & Digital Marketer Dubai | Stibin",
     template: "%s | Stibin Augustine",
   },
   description:
-    "Stibin Augustine is a Full-Stack Developer & Digital Marketing Specialist based in Dubai, UAE. 4+ years building high-performance web & mobile applications (Next.js, Flutter) and driving ROI with SEO (#1 rankings), AEO, GEO, and Google/Meta Ads.",
+    "Dubai freelance web, Next.js, WordPress and Flutter app developer plus digital marketer for SEO, AEO, GEO, Google Ads and Meta Ads.",
   keywords: [
     // Personal Brand
     "Stibin Augustine",
@@ -183,6 +183,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  category: "technology",
+  other: {
+    "geo.region": "AE-DU",
+    "geo.placename": "Dubai",
+    "geo.position": "25.2632;55.2972",
+    ICBM: "25.2632, 55.2972",
+  },
   verification: {
     google: "google729fcc3e471b4f22",
   },
@@ -220,6 +227,10 @@ const rootStructuredData = {
         addressRegion: "Dubai",
         addressCountry: "AE",
       },
+      areaServed: [
+        { "@type": "City", name: "Dubai" },
+        { "@type": "Country", name: "United Arab Emirates" },
+      ],
       knowsAbout: [
         "Full-Stack Web Development",
         "Next.js",
@@ -229,6 +240,7 @@ const rootStructuredData = {
         "Node.js",
         "Mobile App Development",
         "Flutter",
+        "WordPress",
         "Dart",
         "Android Development",
         "iOS Development",
@@ -308,7 +320,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(rootStructuredData),
+            __html: JSON.stringify(rootStructuredData).replace(/</g, "\\u003c"),
           }}
         />
       </head>

@@ -120,8 +120,8 @@ export const CORE_SERVICES: ServiceItem[] = [
       "Speed & Core Web Vitals Optimization",
     ],
     tech: ["Next.js", "React.js", "TypeScript", "Node.js", "Tailwind CSS"],
-    link: "#projects",
-    linkText: "View Web Projects →",
+    link: "/services/web-developer-dubai",
+    linkText: "Explore Web Development →",
   },
   {
     id: "mobile-apps",
@@ -136,8 +136,8 @@ export const CORE_SERVICES: ServiceItem[] = [
       "Real-Time Sync with Firebase / Supabase",
     ],
     tech: ["Flutter", "Dart", "Firebase", "Clean Architecture", "REST APIs"],
-    link: "#projects",
-    linkText: "View Mobile Apps →",
+    link: "/services/app-developer-dubai",
+    linkText: "Explore App Development →",
   },
   {
     id: "ai-solutions",
